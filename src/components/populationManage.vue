@@ -1,4 +1,5 @@
 <template>
+<div>
     <div class="main" id="cMain">
     <div class="m-header">
     <Row>
@@ -285,6 +286,9 @@
     </Row>
     </div>
     </div>
+    
+     <!--<populationManageDetail></populationManageDetail> -->
+</div>
 </template>
 <style scoped lang="less">
 .main {
