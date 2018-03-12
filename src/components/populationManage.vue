@@ -140,7 +140,7 @@
                             <Col span="3">{{ list.phone }}</Col>
                             <Col span="3">{{ list.manageType }}</Col>
                             <Col span="4">{{ list.address }}</Col>
-                            <Col span="2"><span class="c-table-oper" @click="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 1)"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="2">{{ list.name }}</Col>
@@ -150,7 +150,7 @@
                             <Col span="3">{{ list.phone }}</Col>
                             <Col span="3">{{ list.manageType }}</Col>
                             <Col span="4">{{ list.address }}</Col>
-                            <Col span="2"><span class="c-table-oper" @click="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 1)"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -174,7 +174,7 @@
                             <Col span="3">{{ list.phone }}</Col>
                             <Col span="3">{{ list.manageType }}</Col>
                             <Col span="4">{{ list.address }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 2)"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="2">{{ list.name }}</Col>
@@ -184,7 +184,7 @@
                             <Col span="3">{{ list.phone }}</Col>
                             <Col span="3">{{ list.manageType }}</Col>
                             <Col span="4">{{ list.address }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 2)"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -207,7 +207,7 @@
                             <Col span="6">{{ list.id }}</Col>
                             <Col span="4">{{ list.phone }}</Col>
                             <Col span="5">{{ list.address }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 3)"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="2">{{ list.name }}</Col>
@@ -216,7 +216,7 @@
                             <Col span="6">{{ list.id }}</Col>
                             <Col span="4">{{ list.phone }}</Col>
                             <Col span="5">{{ list.address }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 3)"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -239,7 +239,7 @@
                             <Col span="6">{{ list.id }}</Col>
                             <Col span="4">{{ list.phone }}</Col>
                             <Col span="5">{{ list.address }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 4)"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="2">{{ list.name }}</Col>
@@ -248,7 +248,7 @@
                             <Col span="6">{{ list.id }}</Col>
                             <Col span="4">{{ list.phone }}</Col>
                             <Col span="5">{{ list.address }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 4)"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -287,7 +287,7 @@
     </div>
     </div>
     
-     <!--<populationManageDetail></populationManageDetail> -->
+     <showDetail v-show="isDetailShow" @change="close" @changingType="lookMore" :msg="msg"></showDetail>
 </div>
 </template>
 <style scoped lang="less">
@@ -583,6 +583,7 @@ span.ivu-date-picker-cells-cell-disabled:hover {
 
 <script>
 import echarts from "echarts";
+import showDetail from "@/components/showDetail";
 export default {
   name: "populationManage",
   data() {
@@ -591,6 +592,12 @@ export default {
       isRegisterP: false,
       isInsideP: false,
       isOutsizeP: false,
+      isDetailShow: false,
+      msg: {
+        id: 0,
+        type: 0,
+        parent: "population"
+      },
       options4: {
         disabledDate(date) {
           return date && date.valueOf() < Date.now() - 86400000;
@@ -1138,6 +1145,10 @@ export default {
   mounted() {
     this.populationTs(this.content.cvsAllPopulationTs);
   },
+
+  components: {
+    showDetail: showDetail
+  },
   watch: {
     // 监听数据是否有改变
     content: (newValue, oldValue) => {
@@ -1183,7 +1194,15 @@ export default {
           break;
       }
     },
-    lookMore() {},
+    lookMore(id, type) {
+      // type 1代表全部人口，2 户籍人口， 3 来沪人口，4 境外人口
+      this.msg.id = id;
+      this.msg.type = type;
+      this.isDetailShow = true;
+    },
+    close() {
+      this.isDetailShow = false;
+    },
     popClose() {},
     getPage(page) {
       // 根据接口获取新的数据

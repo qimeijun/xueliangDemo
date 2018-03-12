@@ -7,7 +7,7 @@ import populationManage from '@/components/populationManage'
 import keyEnterprise from '@/components/keyEnterprise'
 import railwayProtect from '@/components/railwayProtect'
 import wifiSniffing from '@/components/wifiSniffing'
-import populationManageDetail from '@/components/populationManageDetail'
+import showDetail from '@/components/showDetail'
 Vue.use(Router)
 
 export default new Router({
@@ -35,13 +35,13 @@ export default new Router({
     path: '/railwayProtect/',
     name: 'railwayProtect',
     component: railwayProtect
-    },{
-      path: '/wifiSniffing/',
-      name: 'wifiSniffing',
-      component: wifiSniffing
-    },{
-      path: '/populationManageDetail/',
-      name: 'populationManageDetail',
-      component: populationManageDetail 
-    }]
+  }, {
+    path: '/wifiSniffing/',
+    name: 'wifiSniffing',
+    component: wifiSniffing
+  }, {
+    path: '/showDetail/',
+    name: 'showDetail',
+    component: showDetail
+  }]
 })

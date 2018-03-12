@@ -1,4 +1,5 @@
 <template>
+<div>
     <div class="main" id="cMain">
     <div class="m-header">
     <Row>
@@ -146,7 +147,7 @@
                             <Col span="5">{{ list.unit }}</Col>
                             <Col span="4">{{ list.phone }}</Col>
                             <Col span="2">{{ list.grade }}</Col>
-                            <Col span="2"><span class="c-table-oper" @click="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 1)"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="4">{{ list.area }}</Col>
@@ -155,7 +156,7 @@
                             <Col span="5">{{ list.unit }}</Col>
                             <Col span="4">{{ list.phone }}</Col>
                             <Col span="2">{{ list.grade }}</Col>
-                            <Col span="2"><span class="c-table-oper" @click="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 1)"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -180,7 +181,7 @@
                             <Col span="5">{{ list.scene }}</Col>
                             <Col span="3">{{ list.time }}</Col>
                             <Col span="3">{{ list.crimeName }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 2)"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="3">{{ list.area }}</Col>
@@ -189,7 +190,7 @@
                             <Col span="5">{{ list.scene }}</Col>
                             <Col span="3">{{ list.time }}</Col>
                             <Col span="3">{{ list.crimeName }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 2)"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -203,25 +204,22 @@
                         <span @click="dropdown" class="k-arrowdrop k-dropdown"><Icon type="android-arrow-dropdown"></Icon></span>
                         </Col>
                       </template>
-                      <Col span="2"><strong>操作</strong></Col>
                       <div class="clearfix"></div>
                     </div>
                     <div v-for="(list, i) in content.railwayTroopsInfo.data" >
                         <div v-if="(i % 2) == 0" class="tb clearfix"   style="background-color:#185073;">
                             <Col span="3">{{ list.area }}</Col>
-                            <Col span="6">{{ list.unit }}</Col>
+                            <Col span="7">{{ list.unit }}</Col>
                             <Col span="6">{{ list.line }}</Col>
-                            <Col span="3">{{ list.unitPerson }}</Col>
+                            <Col span="4">{{ list.unitPerson }}</Col>
                             <Col span="4">{{ list.unitPhone }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="3">{{ list.area }}</Col>
-                            <Col span="6">{{ list.unit }}</Col>
+                            <Col span="7">{{ list.unit }}</Col>
                             <Col span="6">{{ list.line }}</Col>
-                            <Col span="3">{{ list.unitPerson }}</Col>
+                            <Col span="4">{{ list.unitPerson }}</Col>
                             <Col span="4">{{ list.unitPhone }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -235,27 +233,24 @@
                         <span @click="dropdown" class="k-arrowdrop k-dropdown"><Icon type="android-arrow-dropdown"></Icon></span>
                         </Col>
                       </template>
-                      <Col span="2"><strong>操作</strong></Col>
                       <div class="clearfix"></div>
                     </div>
                     <div v-for="(list, i) in content.railwaySearchInfo.data" >
                         <div v-if="(i % 2) == 0" class="tb clearfix"   style="background-color:#185073;">
                             <Col span="3">{{ list.area }}</Col>
                             <Col span="5">{{ list.line }}</Col>
-                            <Col span="5">{{ list.unit }}</Col>
+                            <Col span="6">{{ list.unit }}</Col>
                             <Col span="2">{{ list.unitPerson }}</Col>
-                            <Col span="4">{{ list.task }}</Col>
+                            <Col span="5">{{ list.task }}</Col>
                             <Col span="3">{{ list.time }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="3">{{ list.area }}</Col>
                             <Col span="5">{{ list.line }}</Col>
-                            <Col span="5">{{ list.unit }}</Col>
+                            <Col span="6">{{ list.unit }}</Col>
                             <Col span="2">{{ list.unitPerson }}</Col>
-                            <Col span="4">{{ list.task }}</Col>
+                            <Col span="5">{{ list.task }}</Col>
                             <Col span="3">{{ list.time }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -298,6 +293,8 @@
       </div>
     </div>
     </div>
+    <showDetail v-show="isDetailShow" @change="close" @changingType="lookMore" :msg="msg"></showDetail>
+</div>
 </template>
 <style scoped lang="less">
 .main {
@@ -659,6 +656,7 @@ span.ivu-date-picker-cells-cell-disabled:hover {
 
 <script>
 import echarts from "echarts";
+import showDetail from "@/components/showDetail";
 export default {
   name: "railwayProtect",
   data() {
@@ -667,6 +665,12 @@ export default {
       isRWCase: false,
       isRWTroops: false,
       isRWSearch: false,
+      isDetailShow: false,
+      msg: {
+        id: 0,
+        type: 0,
+        parent: "railway"
+      },
       staticsTitle: "路线隐患统计",
       // ========================数据 =====================
       content: {
@@ -858,9 +862,9 @@ export default {
         railwayTroopsInfo: {
           list: [
             { name: "所属辖区", span: 3 },
-            { name: "护路单位", span: 6 },
+            { name: "护路单位", span: 7 },
             { name: "负责路线", span: 6 },
-            { name: "护路单位负责人", span: 3 },
+            { name: "护路单位负责人", span: 4 },
             { name: "负责人电话", span: 4 }
           ],
           data: [
@@ -940,9 +944,9 @@ export default {
           list: [
             { name: "所属辖区", span: 3 },
             { name: "巡查路线", span: 5 },
-            { name: "巡查单位", span: 5 },
+            { name: "巡查单位", span: 6 },
             { name: "巡查人", span: 2 },
-            { name: "巡查任务", span: 4 },
+            { name: "巡查任务", span: 5 },
             { name: "发生日期", span: 3 }
           ],
           data: [
@@ -1212,6 +1216,9 @@ export default {
     this.railwayProtectProblemPie(this.content.cvsRailwayInfoPie);
     this.railwayProtectProblemBar(this.content.cvsRailwayInfoBar);
   },
+  components: {
+    showDetail: showDetail
+  },
   watch: {
     // 监听数据是否有改变
     content: (newValue, oldValue) => {
@@ -1257,7 +1264,19 @@ export default {
           break;
       }
     },
-    lookMore() {},
+    lookMore(id, type) {
+      /**
+       * type
+       * 1- 路线信息
+       * 2-涉路事件
+       */
+      this.msg.id = id;
+      this.msg.type = type;
+      this.isDetailShow = true;
+    },
+    close() {
+      this.isDetailShow = false;
+    },
     popClose() {},
     dropdown() {},
     dropup() {},

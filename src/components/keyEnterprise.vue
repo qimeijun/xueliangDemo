@@ -1,4 +1,5 @@
 <template>
+<div>
     <div class="main" id="cMain">
     <div class="m-header">
     <Row>
@@ -127,7 +128,7 @@
                             <Col span="6">{{ list.adress }}</Col>
                             <Col span="4">{{ list.legal }}</Col>
                             <Col span="4">{{ list.phone }}</Col>
-                            <Col span="2"><span class="c-table-oper" @click="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 1)"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="4">{{ list.type }}</Col>
@@ -135,7 +136,7 @@
                             <Col span="6">{{ list.adress }}</Col>
                             <Col span="4">{{ list.legal }}</Col>
                             <Col span="4">{{ list.phone }}</Col>
-                            <Col span="2"><span class="c-table-oper" @click="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 1)"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -161,7 +162,7 @@
                             <Col span="3">{{ list.time }}</Col>
                             <Col span="2">{{ list.checkPeson }}</Col>
                             <Col span="2">{{ list.status }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 2)"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="3">{{ list.type }}</Col>
@@ -171,7 +172,7 @@
                             <Col span="3">{{ list.time }}</Col>
                             <Col span="2">{{ list.checkPeson }}</Col>
                             <Col span="2">{{ list.status }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 2)"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -195,7 +196,7 @@
                             <Col span="6">{{ list.problem }}</Col>
                             <Col span="3">{{ list.rectificationPeople }}</Col>
                             <Col span="4">{{ list.rectificationPhone }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 3)"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="3">{{ list.type }}</Col>
@@ -203,7 +204,7 @@
                             <Col span="6">{{ list.problem }}</Col>
                             <Col span="3">{{ list.rectificationPeople }}</Col>
                             <Col span="4">{{ list.rectificationPhone }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 3)"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -217,27 +218,24 @@
                         <span @click="dropdown" class="k-arrowdrop k-dropdown"><Icon type="android-arrow-dropdown"></Icon></span>
                         </Col>
                       </template>
-                      <Col span="2"><strong>操作</strong></Col>
                       <div class="clearfix"></div>
                     </div>
                     <div v-for="(list, i) in content.enterpirseForecastInfo.data" >
                         <div v-if="(i % 2) == 0" class="tb clearfix"   style="background-color:#185073;">
                             <Col span="3">{{ list.area }}</Col>
                             <Col span="2">{{ list.type }}</Col>
-                            <Col span="6">{{ list.name }}</Col>
-                            <Col span="6">{{ list.reason }}</Col>
+                            <Col span="7">{{ list.name }}</Col>
+                            <Col span="7">{{ list.reason }}</Col>
                             <Col span="3">{{ list.forecastPerson }}</Col>
                             <Col span="2">{{ list.dealInfo }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="3">{{ list.area }}</Col>
                             <Col span="2">{{ list.type }}</Col>
-                            <Col span="6">{{ list.name }}</Col>
-                            <Col span="6">{{ list.reason }}</Col>
+                            <Col span="7">{{ list.name }}</Col>
+                            <Col span="7">{{ list.reason }}</Col>
                             <Col span="3">{{ list.forecastPerson }}</Col>
                             <Col span="2">{{ list.dealInfo }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -307,6 +305,8 @@
       </div>
     </div>
     </div>
+    <showDetail v-show="isDetailShow" @change="close" @changingType="lookMore" :msg="msg"></showDetail>
+</div>
 </template>
 <style scoped lang="less">
 .main {
@@ -669,6 +669,7 @@ span.ivu-date-picker-cells-cell-disabled:hover {
 
 <script>
 import echarts from "echarts";
+import showDetail from "@/components/showDetail";
 export default {
   name: "keyEnterprise",
   data() {
@@ -678,6 +679,12 @@ export default {
       isPRectif: false,
       isPForecast: false,
       isShow: false,
+      isDetailShow: false,
+      msg: {
+        id: 0,
+        type: 0,
+        parent: "key"
+      },
       staticsTitle: {
         left: "企业信息问题整改统计",
         right: "企业问题预警区域"
@@ -954,8 +961,8 @@ export default {
           list: [
             { name: "所属辖区", span: 3 },
             { name: "企业类型", span: 2 },
-            { name: "企业名称", span: 6 },
-            { name: "预警原因", span: 6 },
+            { name: "企业名称", span: 7 },
+            { name: "预警原因", span: 7 },
             { name: "预警人员", span: 3 },
             { name: "处理情况", span: 2 }
           ],
@@ -1421,6 +1428,9 @@ export default {
     this.keyEnterpriseInfoPie(this.content.cvsEnterpirsePie);
     this.keyEnterpriseInfoBar(this.content.cvsEnterpirseTs);
   },
+  components: {
+    showDetail: showDetail
+  },
   watch: {
     // 监听数据是否有改变
     content: (newValue, oldValue) => {
@@ -1466,7 +1476,20 @@ export default {
           break;
       }
     },
-    lookMore() {},
+    lookMore(id, type) {
+      /**
+       * type
+       * 1-企业信息
+       * 2-企业检查
+       * 3-企业整改
+       */
+      this.msg.id = id;
+      this.msg.type = type;
+      this.isDetailShow = true;
+    },
+    close() {
+      this.isDetailShow = false;
+    },
     popClose() {},
     dropdown() {},
     dropup() {},

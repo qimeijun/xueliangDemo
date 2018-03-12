@@ -1,4 +1,5 @@
 <template>
+<div>
     <div class="main" id="cMain">
     <div class="m-header">
     <Row>
@@ -21,7 +22,6 @@
             <ul>
                 <li @click="casePandect" v-bind:class="{'c-active': isPandect}"><i class="c-cmenu-v1"></i>案件总览</li>
                 <li @click="caseInfo" v-bind:class="{'c-active': isInfo}"><i class="c-cmenu-v2"></i>案件信息</li>
-                <li @click="caseTotal" v-bind:class="{'c-active': isTotal}"><i class="c-cmenu-v3"></i>案件统计</li>
                 <li @click="casePolice" v-bind:class="{'c-active': isPolice}"><i class="c-cmenu-v4"></i>报警信息</li>
                 <li @click="caseTreat" v-bind:class="{'c-active': isTreat}"><i class="c-cmenu-v5"></i>重点防治</li>
                 <li @click="casePerson" v-bind:class="{'c-active': isPerson}"><i class="c-cmenu-v6"></i>关注人员</li>
@@ -99,27 +99,6 @@
                     查询
                 </button>
                 <button class="c-button c-button-fresh" type="button" @click="refresh('letterP')">
-                    <i></i>
-                    刷新
-                </button>
-            </div>
-            <!-- 案件统计 -->
-            <div class="m-cconditional" v-show="isTotal">
-                <input type="text" class="c-input" placeholder="姓名"/>
-                <select class="c-input c-select">
-                    <option value="">请选择性别</option>
-                    <option value="">男</option>
-                    <option value="">女</option>
-                    <option value="">未说明的性别</option>
-                    <option value="">全部</option>
-                </select>
-                <input type="text" class="c-input" placeholder="监控人姓名"/>
-                
-                <button class="c-button c-button-search" type="button" @click="search('drugP')">
-                    <i></i>
-                    查询
-                </button>
-                <button class="c-button c-button-fresh" type="button" @click="refresh('drugP')">
                     <i></i>
                     刷新
                 </button>
@@ -211,55 +190,21 @@
                             <Col span="2">{{ list.name }}</Col>
                             <Col span="2">{{ list.sex }}</Col>
                             <Col span="3">{{ list.reason }}</Col>
-                            <Col span="6">{{ list.caseType }}</Col>
-                            <Col span="3">{{ list.policeAdress }}</Col>
+                            <Col span="5">{{ list.caseType }}</Col>
+                            <Col span="4">{{ list.policeAdress }}</Col>
                             <Col span="3">{{ list.policeMan }}</Col>
                             <Col span="3">{{ list.time }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 1)"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="2">{{ list.name }}</Col>
                             <Col span="2">{{ list.sex }}</Col>
                             <Col span="3">{{ list.reason }}</Col>
-                            <Col span="6">{{ list.caseType }}</Col>
-                            <Col span="3">{{ list.policeAdress }}</Col>
+                            <Col span="5">{{ list.caseType }}</Col>
+                            <Col span="4">{{ list.policeAdress }}</Col>
                             <Col span="3">{{ list.policeMan }}</Col>
                             <Col span="3">{{ list.time }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
-                        </div>
-                    </div>
-                </div>
-                <!-- 案件统计 -->
-                <div class="table" v-show="isTotal">
-                    <div class="th clearfix"  style="background-color:#1a5d87;">
-                      <template v-for="(list) in content.caseTotalInfo.list">
-                        <Col  :span="list.span" >
-                        <strong>{{ list.name }}</strong>
-                        </Col>
-                      </template>
-                      <Col span="2"><strong>操作</strong></Col>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div v-for="(list, i) in content.caseTotalInfo.data" >
-                        <div v-if="(i % 2) == 0" class="tb clearfix"   style="background-color:#185073;">
-                            <Col span="2">{{ list.name }}</Col>
-                            <Col span="2">{{ list.sex }}</Col>
-                            <Col span="3">{{ list.jurisdiction }}</Col>
-                            <Col span="6">{{ list.id }}</Col>
-                            <Col span="3">{{ list.measurePhone }}</Col>
-                            <Col span="3">{{ list.measure }}</Col>
-                            <Col span="3">{{ list.situation }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
-                        </div>
-                        <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
-                            <Col span="2">{{ list.name }}</Col>
-                            <Col span="2">{{ list.sex }}</Col>
-                            <Col span="3">{{ list.jurisdiction }}</Col>
-                            <Col span="6">{{ list.id }}</Col>
-                            <Col span="3">{{ list.measurePhone }}</Col>
-                            <Col span="3">{{ list.measure }}</Col>
-                            <Col span="3">{{ list.situation }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 1)"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -284,7 +229,7 @@
                             <Col span="4">{{ list.alarmPersonPhone }}</Col>
                             <Col span="2">{{ list.isPolice }}</Col>
                             <Col span="2">{{ list.policeMan }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 2)"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="5">{{ list.address }}</Col>
@@ -295,7 +240,7 @@
                             <Col span="4">{{ list.alarmPersonPhone }}</Col>
                             <Col span="2">{{ list.isPolice }}</Col>
                             <Col span="2">{{ list.policeMan }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore(1, 2)"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -307,7 +252,6 @@
                         <strong>{{ list.name }}</strong>
                         </Col>
                       </template>
-                      <Col span="2"><strong>操作</strong></Col>
                       <div class="clearfix"></div>
                     </div>
                     <div v-for="(list, i) in content.caseTreatInfo.data" >
@@ -315,19 +259,17 @@
                             <Col span="4">{{ list.area }}</Col>
                             <Col span="3">{{ list.areaType }}</Col>
                             <Col span="3">{{ list.oftenCase }}</Col>
-                            <Col span="6">{{ list.unit }}</Col>
+                            <Col span="7">{{ list.unit }}</Col>
                             <Col span="3">{{ list.unitMan }}</Col>
-                            <Col span="3">{{ list.unitPhone }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="4">{{ list.unitPhone }}</Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="4">{{ list.area }}</Col>
                             <Col span="3">{{ list.areaType }}</Col>
                             <Col span="3">{{ list.oftenCase }}</Col>
-                            <Col span="6">{{ list.unit }}</Col>
+                            <Col span="7">{{ list.unit }}</Col>
                             <Col span="3">{{ list.unitMan }}</Col>
-                            <Col span="3">{{ list.unitPhone }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="4">{{ list.unitPhone }}</Col>
                         </div>
                     </div>
                 </div>
@@ -339,7 +281,6 @@
                         <strong>{{ list.name }}</strong>
                         </Col>
                       </template>
-                      <Col span="2"><strong>操作</strong></Col>
                       <div class="clearfix"></div>
                     </div>
                     <div v-for="(list, i) in content.casePersonInfo.data" >
@@ -348,20 +289,18 @@
                             <Col span="2">{{ list.name }}</Col>
                             <Col span="2">{{ list.sex }}</Col>
                             <Col span="5">{{ list.id }}</Col>
-                            <Col span="4">{{ list.address }}</Col>
+                            <Col span="6">{{ list.address }}</Col>
                             <Col span="3">{{ list.unitPhone }}</Col>
                             <Col span="3">{{ list.unitMan }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="3">{{ list.area }}</Col>
                             <Col span="2">{{ list.name }}</Col>
                             <Col span="2">{{ list.sex }}</Col>
                             <Col span="5">{{ list.id }}</Col>
-                            <Col span="4">{{ list.address }}</Col>
+                            <Col span="6">{{ list.address }}</Col>
                             <Col span="3">{{ list.unitPhone }}</Col>
                             <Col span="3">{{ list.unitMan }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -445,6 +384,8 @@
         </div>
     </div>
     </div>
+    <showDetail v-show="isDetailShow" @change="close" @changingType="lookMore" :msg="msg"></showDetail>
+</div>
 </template>
 <style scoped lang="less">
 .main {
@@ -854,6 +795,7 @@ span.ivu-date-picker-cells-cell-disabled:hover {
 
 <script>
 import echarts from "echarts";
+import showDetail from "@/components/showDetail";
 export default {
   name: "specialCrowd",
   data() {
@@ -861,10 +803,15 @@ export default {
       isShow: true,
       isPandect: false,
       isInfo: true,
-      isTotal: false,
       isPolice: false,
       isTreat: false,
       isPerson: false,
+      isDetailShow: false,
+      msg: {
+        id: 0,
+        type: 0,
+        parent: "case"
+      },
       options4: {
         disabledDate(date) {
           return date && date.valueOf() < Date.now() - 86400000;
@@ -882,8 +829,8 @@ export default {
             { name: "姓名", span: 2 },
             { name: "性别", span: 2 },
             { name: "案由", span: 3 },
-            { name: "案件类型", span: 6 },
-            { name: "办案人单位", span: 3 },
+            { name: "案件类型", span: 5 },
+            { name: "办案人单位", span: 4 },
             { name: "办案民警", span: 3 },
             { name: "登记时间", span: 3 }
           ],
@@ -977,109 +924,6 @@ export default {
               policeAdress: "金山区张堰派出所",
               policeMan: "李四",
               time: "2017.12.13"
-            }
-          ]
-        },
-        caseTotalInfo: {
-          list: [
-            { name: "姓名", span: 2 },
-            { name: "性别", span: 2 },
-            { name: "所属管辖", span: 3 },
-            { name: "公民身份证", span: 6 },
-            { name: "监控人联系方式", span: 3 },
-            { name: "监控人姓名", span: 3 },
-            { name: "监控情况", span: 3 }
-          ],
-          data: [
-            {
-              name: "周远民",
-              sex: "男",
-              jurisdiction: "金山卫镇",
-              id: "522135198712135431",
-              measurePhone: "15811215432",
-              measure: "张三",
-              situation: "在控"
-            },
-            {
-              name: "张利",
-              sex: "男",
-              jurisdiction: "玉兰新村",
-              id: "31010119801234246",
-              measurePhone: "15811215432",
-              measure: "张三",
-              situation: "在控"
-            },
-            {
-              name: "张旭鹏",
-              sex: "女",
-              jurisdiction: "蒋庄村",
-              id: "220062198802260018",
-              measurePhone: "15811215432",
-              measure: "张三",
-              situation: "在控"
-            },
-            {
-              name: "熊化艳",
-              sex: "女",
-              jurisdiction: "德胜村",
-              id: "220621197012012362",
-              measurePhone: "15811215432",
-              measure: "张三",
-              situation: "在控"
-            },
-            {
-              name: "袁旭",
-              sex: "男",
-              jurisdiction: "盐山镇",
-              id: "370303196104181018",
-              measurePhone: "15811215432",
-              measure: "张三",
-              situation: "在控"
-            },
-            {
-              name: "李康平",
-              sex: "男",
-              jurisdiction: "金山卫镇",
-              id: "370303196104181018",
-              measurePhone: "15811215432",
-              measure: "张三",
-              situation: "在控"
-            },
-            {
-              name: "王桂荣",
-              sex: "女",
-              jurisdiction: "顾家桥",
-              id: "370303196104181018",
-              measurePhone: "15811215432",
-              measure: "张三",
-              situation: "在控"
-            },
-            {
-              name: "刘凯",
-              sex: "男",
-              jurisdiction: "金山卫镇",
-              id: "370303196104181018",
-              measurePhone: "15811215432",
-              measure: "张三",
-              situation: "在控"
-            },
-            {
-              name: "杨金凤",
-              sex: "女",
-              jurisdiction: "金山卫镇",
-              id: "370303196104181018",
-              measurePhone: "15811215432",
-              measure: "张三",
-              situation: "在控"
-            },
-            {
-              name: "赵红",
-              sex: "女",
-              jurisdiction: "金山卫镇",
-              id: "370303196104181018",
-              measurePhone: "15811215432",
-              measure: "张三",
-              situation: "在控"
             }
           ]
         },
@@ -1202,9 +1046,9 @@ export default {
             { name: "区域", span: 4 },
             { name: "涉事区域类型", span: 3 },
             { name: "频发事件", span: 3 },
-            { name: "整治单位", span: 6 },
+            { name: "整治单位", span: 7 },
             { name: "整治单位负责人", span: 3 },
-            { name: "负责人电话", span: 3 }
+            { name: "负责人电话", span: 4 }
           ],
           data: [
             {
@@ -1295,7 +1139,7 @@ export default {
             { name: "姓名", span: 2 },
             { name: "性别", span: 2 },
             { name: "公民身份证", span: 5 },
-            { name: "居住地址", span: 4 },
+            { name: "居住地址", span: 6 },
             { name: "区域负责人", span: 3 },
             { name: "负责人电话", span: 3 }
           ],
@@ -1773,6 +1617,9 @@ export default {
     this.caseArea(this.content.cvsCaseInfo);
     this.caseTs(this.content.cvsCaseInfoTs);
   },
+  components: {
+    showDetail: showDetail
+  },
   watch: {
     // 监听数据是否有改变
     content: (newValue, oldValue) => {
@@ -1818,7 +1665,19 @@ export default {
           break;
       }
     },
-    lookMore() {},
+    lookMore(id, type) {
+      /**
+       * type
+       * 1-案件信息
+       * 2-报警信息
+       */
+      this.msg.id = id;
+      this.msg.type = type;
+      this.isDetailShow = true;
+    },
+    close() {
+      this.isDetailShow = false;
+    },
     popClose() {},
     cvsCaseInfoChange() {
       // 根据接口获取新的数据
@@ -1832,7 +1691,6 @@ export default {
       this.isShow = false;
       this.isPandect = true;
       this.isInfo = false;
-      this.isTotal = false;
       this.isPolice = false;
       this.isTreat = false;
       this.isPerson = false;
@@ -1847,24 +1705,10 @@ export default {
       this.isShow = true;
       this.isPandect = false;
       this.isInfo = true;
-      this.isTotal = false;
       this.isPolice = false;
       this.isTreat = false;
       this.isPerson = false;
       this.caseArea(this.content.cvsCaseInfo);
-      this.caseTs(this.content.cvsCaseInfoTs);
-    },
-    caseTotal() {
-      this.staticsTitle.left = "报警案件信息";
-      this.staticsTitle.right = "报警案件区域统计";
-      this.isShow = true;
-      this.isPandect = false;
-      this.isInfo = false;
-      this.isTotal = true;
-      this.isPolice = false;
-      this.isTreat = false;
-      this.isPerson = false;
-      this.caseArea(this.content.cvsCaseTotal);
       this.caseTs(this.content.cvsCaseInfoTs);
     },
     casePolice() {
@@ -1873,7 +1717,6 @@ export default {
       this.isShow = true;
       this.isPandect = false;
       this.isInfo = false;
-      this.isTotal = false;
       this.isPolice = true;
       this.isTreat = false;
       this.isPerson = false;
@@ -1886,7 +1729,6 @@ export default {
       this.isShow = true;
       this.isPandect = false;
       this.isInfo = false;
-      this.isTotal = false;
       this.isPolice = false;
       this.isTreat = true;
       this.isPerson = false;
@@ -1899,7 +1741,6 @@ export default {
       this.isShow = true;
       this.isPandect = false;
       this.isInfo = false;
-      this.isTotal = false;
       this.isPolice = false;
       this.isTreat = false;
       this.isPerson = true;
