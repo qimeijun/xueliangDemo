@@ -2167,17 +2167,17 @@ export default {
           },
           {
             name: "案件简要经过及现场状况",
-            value: "2027-04-12",
+            value: "入室抢劫，屋主发现，将其杀害",
             color: colorV1,
             width: sWidth * 2,
             height: sHeight
           },
           {
             name: "受害情况、损失物品数量等",
-            value: "否",
+            value: "屋主重伤，贵重物品失窃",
             color: colorV2,
             width: sWidth * 2,
-            height: sHeigh
+            height: sHeight
           }
         ];
       } else {
@@ -2320,14 +2320,14 @@ export default {
           },
           {
             name: "案件简要经过及现场状况",
-            value: "2027-04-12",
+            value: "入室抢劫，屋主发现，将其杀害",
             color: colorV1,
             width: sWidth * 2,
             height: sHeight
           },
           {
             name: "受害情况、损失物品数量等",
-            value: "否",
+            value: "屋主重伤，贵重物品失窃",
             color: colorV2,
             width: sWidth * 2,
             height: sHeight

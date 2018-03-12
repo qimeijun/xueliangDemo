@@ -147,7 +147,7 @@
                             <Col span="4">{{ list.time }}</Col>
                             <Col span="4">{{ list.from }}</Col>
                             <Col span="5">{{ list.reason }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="3">{{ list.area }}</Col>
@@ -155,7 +155,7 @@
                             <Col span="4">{{ list.time }}</Col>
                             <Col span="4">{{ list.from }}</Col>
                             <Col span="5">{{ list.reason }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -176,14 +176,14 @@
                             <Col span="6">{{ list.macIP }}</Col>
                             <Col span="7">{{ list.address }}</Col>
                             <Col span="5">{{ list.time }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="4">{{ list.type }}</Col>
                             <Col span="6">{{ list.macIP }}</Col>
                             <Col span="7">{{ list.address }}</Col>
                             <Col span="5">{{ list.time }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -203,13 +203,13 @@
                             <Col span="7">{{ list.macIP }}</Col>
                             <Col span="5">{{ list.number }}</Col>
                             <Col span="10">{{ list.track }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore"></span></Col>
                         </div>
                         <div  v-else  class="tb clearfix" style="background-color: #1a5d87;">
                             <Col span="7">{{ list.macIP }}</Col>
                             <Col span="5">{{ list.number }}</Col>
                             <Col span="10">{{ list.track }}</Col>
-                            <Col span="2"><span class="c-table-oper" @onclick="lookMore"></span></Col>
+                            <Col span="2"><span class="c-table-oper" @click="lookMore"></span></Col>
                         </div>
                     </div>
                 </div>
@@ -402,10 +402,10 @@
     width: 22px;
     height: 22px;
     cursor: pointer;
-    background: url(../assets/images/c_operation.png) no-repeat center center;
+    background: url(../assets/images/voice_icon.png) no-repeat center center;
   }
   .c-table-oper:hover {
-    background: url(../assets/images/c_operation_2.png) no-repeat center center;
+    background: url(../assets/images/voice_icon_v2.png) no-repeat center center;
   }
   .th .ivu-col,
   .tb .ivu-col {
