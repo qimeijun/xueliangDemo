@@ -290,246 +290,12 @@
      <showDetail v-show="isDetailShow" @change="close" @changingType="lookMore" :msg="msg"></showDetail>
 </div>
 </template>
-<style scoped lang="less">
-.main {
-  position: absolute;
-  left: 50%;
-  transform: translate(-25%);
-  width: 1265px;
-  height: 963px;
-  font-size: 16px;
-  overflow: hidden;
-  z-index: 1001;
-  background: url(../assets/images/c_bg1.png) no-repeat center center;
-}
-.m-header {
-  margin-top: 50px;
-  height: 45px;
-}
-.m-title {
-  height: 45px;
-  width: 100%;
-  img {
-    width: 60%;
-  }
-}
-.m-close span {
-  display: inline-block;
-  margin-right: 30px;
-  width: 23px;
-  height: 23px;
-  cursor: pointer;
-  background: url(../assets/images/close.png) no-repeat center center;
-}
-.m-content {
-  width: 1245px;
-  height: 600px;
-}
-.m-cmenu {
-  width: 100%;
-  height: 600px;
-  background: url(../assets/images/c_r_bg.png) no-repeat center center;
-  ul {
-    height: 557px;
-    width: 220px;
-    list-style: none;
-    margin-top: 10px;
-    padding: 10px;
-    font-size: 22px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    .c-active {
-      background: url(../assets/images/m_button_2.png) no-repeat center center;
-    }
-    li {
-      width: 158px;
-      height: 42px;
-      margin: 30px 0 30px 40px;
-      line-height: 42px;
-      text-align: center;
-      cursor: pointer;
-      background: url(../assets/images/m_button_1.png) no-repeat center center;
-      i::before {
-        content: "";
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        margin-right: 8px;
-      }
-      .c-cmenu-v1 {
-        background: url(../assets/images/c_icon_v1.png) no-repeat center center;
-      }
-      .c-cmenu-v2 {
-        background: url(../assets/images/c_icon_v2.png) no-repeat center center;
-      }
-      .c-cmenu-v3 {
-        background: url(../assets/images/c_icon_v3.png) no-repeat center center;
-      }
-      .c-cmenu-v4 {
-        background: url(../assets/images/c_icon_v4.png) no-repeat center center;
-      }
-      .c-cmenu-v5 {
-        background: url(../assets/images/c_icon_v5.png) no-repeat center center;
-      }
-      .c-cmenu-v6 {
-        background: url(../assets/images/c_icon_v6.png) no-repeat center center;
-      }
-      .c-cmenu-v7 {
-        background: url(../assets/images/c_icon_v7.png) no-repeat center center;
-      }
-    }
-    li:hover {
-      background: url(../assets/images/m_button_2.png) no-repeat center center;
-    }
-  }
-}
-.m-ccontent {
-  width: 100%;
-  height: 600px;
-  .m-cconditional {
-    margin-top: 30px;
-    text-align: left;
-    .c-input {
-      width: 150px;
-      height: 40px;
-      padding-left: 10px;
-      margin-left: 10px;
-      color: #92a1b4;
-      background-color: #14375f;
-      border: none;
-    }
-    .c-input:hover,
-    .c-input:focus {
-      outline: 0;
-      border: 1px solid #01bbb8;
-    }
-    .c-select {
-      width: 150px;
-      color: #fbfbfb;
-      option {
-        -webkit-appearance: none;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        background-color: #14375f;
-        background-color: #14375f;
-        color: #fbfbfb;
-      }
-    }
-    .c-button {
-      margin-left: 20px;
-      height: 40px;
-      width: 95px;
-      outline: none;
-      border: none;
-      border-radius: 50px 50px 50px 50px;
-      color: #fbfbfb;
-      line-height: 40px;
-      background-color: #01bbb8;
-    }
-    .c-button:hover {
-      background-color: #21fcf6;
-    }
-    .c-button-search i::before {
-      content: "";
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      vertical-align: middle;
-      background: url(../assets/images/c_search.png) no-repeat center center;
-    }
-    .c-button-fresh i::before {
-      content: "";
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      vertical-align: middle;
-      background: url(../assets/images/c_refresh.png) no-repeat center center;
-    }
-  }
-}
-.m-ctable {
-  margin-top: 20px;
-  .c-table-oper {
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    cursor: pointer;
-    background: url(../assets/images/c_operation.png) no-repeat center center;
-  }
-  .c-table-oper:hover {
-    background: url(../assets/images/c_operation_2.png) no-repeat center center;
-  }
-  .th .ivu-col,
-  .tb .ivu-col {
-    border-left: none;
-  }
-}
 
-.m-page {
-  margin-top: 10px;
-  color: #f0f1f3;
-  font-size: 14px;
-  .c-page-l {
-    text-align: left;
-    input {
-      color: white;
-      width: 50px;
-      background-color: #05283b;
-      border: 1px solid white;
-      outline: none;
-    }
-  }
-  .c-page-r {
-    text-align: right;
-  }
-}
-
-.m-foot {
-  width: 1225px;
-  height: 260px;
-  margin: 10px auto 0;
-  .m-foot-l {
-    width: 1225px;
-    height: 213px;
-    margin: auto;
-    background: url(../assets/images/c_case_bg4.png) no-repeat center center;
-  }
-  .m-foot-head::before {
-    content: "";
-    position: absolute;
-    left: -30px;
-    width: 30px;
-    height: 30px;
-    background: url(../assets/images/title-left.png) no-repeat center center;
-  }
-  .m-foot-head {
-    position: absolute;
-    left: 50px;
-    top: 5px;
-    width: 100%;
-    height: 30px;
-    line-height: 30px;
-    text-align: left;
-    color: #0dcba5;
-    font-size: 16px;
-    font-weight: bolder;
-  }
-  .m-foot-head::after {
-    content: "";
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: url(../assets/images/title-right.png) no-repeat center center;
-  }
-  .m-foot-statics {
-    position: absolute;
-    width: 1225px;
-    height: 175px;
-    top: 20px;
-  }
-}
+<style lang="less" scoped>
+@import "../assets/style.less";
 </style>
 
-<style>
+ <style>
 /*  覆盖iview中分页组件的颜色 */
 #cMain .ivu-page-item,
 #cMain .ivu-page-prev,
@@ -556,7 +322,7 @@
 #cMain .ivu-input {
   background-color: #14375f;
   height: 40px;
-  width: 150px;
+  width: 110px;
   border: none;
   border-radius: 0px;
   color: #92a1b4;
@@ -577,6 +343,10 @@ span.ivu-date-picker-cells-cell-disabled:hover {
 #cMain .ivu-date-picker-cells-cell:hover em {
   color: #fbfbfb;
   background-color: #20aab4;
+}
+#cMain .th .ivu-col,
+#cMain .tb .ivu-col {
+  line-height: 42px;
 }
 </style>
 
@@ -1203,7 +973,9 @@ export default {
     close() {
       this.isDetailShow = false;
     },
-    popClose() {},
+    popClose() {
+      this.$emit("on-close");
+    },
     getPage(page) {
       // 根据接口获取新的数据
     },

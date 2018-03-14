@@ -1,0 +1,111 @@
+{
+
+  "type": "force",
+  "categories": [
+  {
+    "name": "吸毒人员",
+    "itemStyle":
+    {
+      "normal":
+      {
+        "color": "#449caa"
+      }
+    }
+  },
+  {
+    "name": "信访人员",
+    "itemStyle":
+    {
+      "normal":
+      {
+        "color": "#4990e2"
+      }
+    }
+  },
+  {
+    "name": "维稳人员",
+    "itemStyle":
+    {
+      "normal":
+      {
+        "color": "#377dff"
+      }
+    }
+  },
+  {
+    "name": "精神病人",
+    "itemStyle":
+    {
+      "normal":
+      {
+        "color": "#7b7eff"
+      }
+    }
+  },
+  {
+    "name": "失踪人员",
+    "itemStyle":
+    {
+      "normal":
+      {
+        "color": "#1474c8"
+      }
+    }
+  },
+  {
+    "name": "敏感人员",
+    "itemStyle":
+    {
+      "normal":
+      {
+        "color": "#2d6483"
+      }
+    }
+  }
+  ],
+  "nodes": [
+  {
+    "name": "特殊人群趋势统计",
+    "symbolSize": 30
+  },
+  {
+    "name": "吸毒人员",
+    "category": 0,
+    "draggable": "true"
+
+  },
+  {
+    "name": "张三",
+    "category": 1,
+    "draggable": "true"
+  },
+  {
+    "name": "信访人员",
+    "category": 1,
+    "draggable": "true"
+  },
+  {
+    "name": "李四",
+    "category": 1,
+    "draggable": "true"
+
+  }],
+
+  "links": [
+  {
+    "source": 0,
+    "target": 1
+  },
+  {
+    "source": 1,
+    "target": 2
+  },
+  {
+    "source": 0,
+    "target": 3
+  },
+  {
+    "source": 3,
+    "target": 4
+  }]
+}

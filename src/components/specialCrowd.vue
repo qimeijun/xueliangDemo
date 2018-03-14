@@ -443,7 +443,7 @@
             <div class="m-foot-head">
                 {{ staticsTitle.left }}
             </div>
-            <div class="m-foot-statics" id="mentalPatientsArea"></div>
+            <div class="m-foot-statics" id="specialCrowdArea"></div>
         </div>
         </Col>
         <Col span="12">
@@ -451,7 +451,7 @@
             <div class="m-foot-head">
                 {{ staticsTitle.right }}
             </div>
-            <div class="m-foot-statics" id="mentalPatientsTs"></div>
+            <div class="m-foot-statics" id="specialCrowdTs"></div>
         </div>
         </Col>
     </Row>
@@ -462,242 +462,20 @@
 </div>
 </template>
 <style scoped lang="less">
-.main {
-  position: absolute;
-  left: 50%;
-  transform: translate(-25%);
-  width: 1265px;
-  height: 963px;
-  font-size: 16px;
-  overflow: hidden;
-  z-index: 1001;
-  background: url(../assets/images/c_bg1.png) no-repeat center center;
-}
-.m-header {
-  margin-top: 50px;
-  height: 45px;
-}
-.m-title {
-  height: 45px;
-  width: 100%;
-  img {
-    width: 60%;
-  }
-}
-.m-close span {
-  display: inline-block;
-  margin-right: 30px;
-  width: 23px;
-  height: 23px;
-  cursor: pointer;
-  background: url(../assets/images/close.png) no-repeat center center;
-}
-.m-content {
-  width: 1245px;
-  height: 600px;
-}
-.m-cmenu {
-  width: 100%;
-  height: 600px;
-  background: url(../assets/images/c_r_bg.png) no-repeat center center;
-  ul {
-    height: 557px;
-    width: 220px;
-    list-style: none;
-    margin-top: 10px;
-    padding: 10px;
-    font-size: 22px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    .c-active {
-      background: url(../assets/images/m_button_2.png) no-repeat center center;
-    }
-    li {
-      width: 158px;
-      height: 42px;
-      margin: 30px 0 30px 40px;
-      line-height: 42px;
-      text-align: center;
-      cursor: pointer;
-      background: url(../assets/images/m_button_1.png) no-repeat center center;
-      i::before {
-        content: "";
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        margin-right: 8px;
-      }
-      .c-cmenu-v1 {
-        background: url(../assets/images/c_icon_v1.png) no-repeat center center;
-      }
-      .c-cmenu-v2 {
-        background: url(../assets/images/c_icon_v2.png) no-repeat center center;
-      }
-      .c-cmenu-v3 {
-        background: url(../assets/images/c_icon_v3.png) no-repeat center center;
-      }
-      .c-cmenu-v4 {
-        background: url(../assets/images/c_icon_v4.png) no-repeat center center;
-      }
-      .c-cmenu-v5 {
-        background: url(../assets/images/c_icon_v5.png) no-repeat center center;
-      }
-      .c-cmenu-v6 {
-        background: url(../assets/images/c_icon_v6.png) no-repeat center center;
-      }
-      .c-cmenu-v7 {
-        background: url(../assets/images/c_icon_v7.png) no-repeat center center;
-      }
-    }
-    li:hover {
-      background: url(../assets/images/m_button_2.png) no-repeat center center;
-    }
-  }
-}
-.m-ccontent {
-  width: 100%;
-  height: 600px;
-  .m-cconditional {
-    margin-top: 30px;
-    text-align: left;
-    .c-input {
-      width: 150px;
-      height: 40px;
-      padding-left: 10px;
-      margin-left: 10px;
-      color: #92a1b4;
-      background-color: #14375f;
-      border: none;
-    }
-    .c-input:hover,
-    .c-input:focus {
-      outline: 0;
-      border: 1px solid #01bbb8;
-    }
-    .c-select {
-      width: 150px;
-      color: #fbfbfb;
-      option {
-        -webkit-appearance: none;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        background-color: #14375f;
-        color: #fbfbfb;
-      }
-    }
-    .c-button {
-      margin-left: 20px;
-      height: 40px;
-      width: 95px;
-      outline: none;
-      border: none;
-      border-radius: 50px 50px 50px 50px;
-      color: #fbfbfb;
-      line-height: 40px;
-      background-color: #01bbb8;
-    }
-    .c-button:hover {
-      background-color: #21fcf6;
-    }
-    .c-button-search i::before {
-      content: "";
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      vertical-align: middle;
-      background: url(../assets/images/c_search.png) no-repeat center center;
-    }
-    .c-button-fresh i::before {
-      content: "";
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      vertical-align: middle;
-      background: url(../assets/images/c_refresh.png) no-repeat center center;
-    }
-  }
-}
-.m-ctable {
-  margin-top: 20px;
-  .c-table-oper {
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    cursor: pointer;
-    background: url(../assets/images/c_operation.png) no-repeat center center;
-  }
-  .c-table-oper:hover {
-    background: url(../assets/images/c_operation_2.png) no-repeat center center;
-  }
-  .th .ivu-col,
-  .tb .ivu-col {
-    border-left: none;
-  }
-}
-
-.m-page {
-  margin-top: 10px;
-  color: #f0f1f3;
-  font-size: 14px;
-  .c-page-l {
-    text-align: left;
-    input {
-      color: white;
-      width: 50px;
-      background-color: #05283b;
-      border: 1px solid white;
-      outline: none;
-    }
-  }
-  .c-page-r {
-    text-align: right;
-  }
-}
-
+@import "../assets/style.less";
 .m-foot {
-  width: 98%;
-  height: 260px;
-  margin: 10px auto 0;
-  .m-foot-l {
-    width: 598px;
+  .m-foot-l,
+  .m-foot-r {
+    width: 465px;
     height: 213px;
     margin: auto;
     background: url(../assets/images/c_f_l.png) no-repeat center center;
+    background-size: 100% 100%;
   }
-  .m-foot-r {
-    width: 599px;
-    height: 213px;
-    margin: auto;
-    background: url(../assets/images/c_f_r.png) no-repeat center center;
-  }
-  .m-foot-head::before {
-    content: "";
-    position: absolute;
-    left: -30px;
-    width: 30px;
-    height: 30px;
-    background: url(../assets/images/title-left.png) no-repeat center center;
-  }
-  .m-foot-head {
-    position: absolute;
-    left: 50px;
-    top: 5px;
-    width: 100%;
-    height: 30px;
-    line-height: 30px;
-    text-align: left;
-    color: #0dcba5;
-    font-weight: bolder;
-  }
-  .m-foot-head::after {
-    content: "";
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: url(../assets/images/title-right.png) no-repeat center center;
-  }
+
   .m-foot-statics {
     position: absolute;
-    width: 590px;
+    width: 465px;
     height: 175px;
     top: 30px;
   }
@@ -731,7 +509,7 @@
 #cMain .ivu-input {
   background-color: #14375f;
   height: 40px;
-  width: 150px;
+  width: 110px;
   border: none;
   border-radius: 0px;
   color: #92a1b4;
@@ -753,11 +531,12 @@ span.ivu-date-picker-cells-cell-disabled:hover {
   color: #fbfbfb;
   background-color: #20aab4;
 }
+#cMain .th .ivu-col,
+#cMain .tb .ivu-col {
+  line-height: 42px;
+}
 </style>
-
-
 <script>
-import echarts from "echarts";
 import showDetail from "@/components/showDetail";
 export default {
   name: "specialCrowd",
@@ -1881,8 +1660,8 @@ export default {
     };
   },
   mounted() {
-    this.mentalPatientsArea(this.content.cvsMentalPatientsArea);
-    this.mentalPatientsTs(this.content.cvsMentalPatientsTs);
+    this.specialCrowdArea(this.content.cvsMentalPatientsArea);
+    this.specialCrowdTs(this.content.cvsMentalPatientsTs);
   },
   watch: {
     // 监听数据是否有改变
@@ -1949,7 +1728,9 @@ export default {
     close() {
       this.isDetailShow = false;
     },
-    popClose() {},
+    popClose() {
+      this.$emit("on-close");
+    },
     getPage(page) {
       // 根据接口获取新的数据
     },
@@ -1963,8 +1744,8 @@ export default {
       this.isTermerP = false;
       this.isMissP = false;
       this.isSensitiveP = false;
-      this.mentalPatientsArea(this.content.cvsLetterPersonArea);
-      this.mentalPatientsTs(this.content.cvsLetterPersonTs);
+      this.specialCrowdArea(this.content.cvsLetterPersonArea);
+      this.specialCrowdTs(this.content.cvsLetterPersonTs);
     },
     drugPerson() {
       this.staticsTitle.left = "吸毒人员区域分布";
@@ -1976,8 +1757,8 @@ export default {
       this.isTermerP = false;
       this.isMissP = false;
       this.isSensitiveP = false;
-      this.mentalPatientsArea(this.content.cvsDrugPersonArea);
-      this.mentalPatientsTs(this.content.cvsDrugPersonTs);
+      this.specialCrowdArea(this.content.cvsDrugPersonArea);
+      this.specialCrowdTs(this.content.cvsDrugPersonTs);
     },
     stabilityObj() {
       this.staticsTitle.left = "维稳对象区域分布";
@@ -1989,8 +1770,8 @@ export default {
       this.isTermerP = false;
       this.isMissP = false;
       this.isSensitiveP = false;
-      this.mentalPatientsArea(this.content.cvsStabilityObjArea);
-      this.mentalPatientsTs(this.content.cvsStabilityObjTs);
+      this.specialCrowdArea(this.content.cvsStabilityObjArea);
+      this.specialCrowdTs(this.content.cvsStabilityObjTs);
     },
     termersCom() {
       this.staticsTitle.left = "社区服刑区域分布";
@@ -2002,8 +1783,8 @@ export default {
       this.isTermerP = true;
       this.isMissP = false;
       this.isSensitiveP = false;
-      this.mentalPatientsArea(this.content.cvsTermersComArea);
-      this.mentalPatientsTs(this.content.cvsTermersComTs);
+      this.specialCrowdArea(this.content.cvsTermersComArea);
+      this.specialCrowdTs(this.content.cvsTermersComTs);
     },
     mentalPatients() {
       this.staticsTitle.left = "精神病人区域分布";
@@ -2015,8 +1796,8 @@ export default {
       this.isTermerP = false;
       this.isMissP = false;
       this.isSensitiveP = false;
-      this.mentalPatientsArea(this.content.cvsMentalPatientsArea);
-      this.mentalPatientsTs(this.content.cvsMentalPatientsTs);
+      this.specialCrowdArea(this.content.cvsMentalPatientsArea);
+      this.specialCrowdTs(this.content.cvsMentalPatientsTs);
     },
     missPerson() {
       this.staticsTitle.left = "失踪人员区域分布";
@@ -2028,8 +1809,8 @@ export default {
       this.isTermerP = false;
       this.isMissP = true;
       this.isSensitiveP = false;
-      this.mentalPatientsArea(this.content.cvsMissPersonArea);
-      this.mentalPatientsTs(this.content.cvsMissPersonTs);
+      this.specialCrowdArea(this.content.cvsMissPersonArea);
+      this.specialCrowdTs(this.content.cvsMissPersonTs);
     },
     sensitivePerson() {
       this.staticsTitle.left = "敏感人员区域分布";
@@ -2041,12 +1822,11 @@ export default {
       this.isTermerP = false;
       this.isMissP = false;
       this.isSensitiveP = true;
-      this.mentalPatientsArea(this.content.cvsSensitivePersonArea);
-      this.mentalPatientsTs(this.content.cvsSensitivePersonTs);
+      this.specialCrowdArea(this.content.cvsSensitivePersonArea);
+      this.specialCrowdTs(this.content.cvsSensitivePersonTs);
     },
-    mentalPatientsArea(datas) {
-      let myChart = echarts.init(document.getElementById("mentalPatientsArea"));
-      // let datas = this.content.cvsMentalPatientsArea.data;
+    specialCrowdArea(datas) {
+      let myChart = echarts.init(document.getElementById("specialCrowdArea"));
       let option = {
         tooltip: {
           show: true,
@@ -2129,9 +1909,10 @@ export default {
         ]
       };
       myChart.setOption(option);
+      console.log(myChart);
     },
-    mentalPatientsTs(datas) {
-      let myChart = echarts.init(document.getElementById("mentalPatientsTs"));
+    specialCrowdTs(datas) {
+      let myChart = echarts.init(document.getElementById("specialCrowdTs"));
       let option = {
         color: datas.color,
         tooltip: {

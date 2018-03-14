@@ -63,18 +63,20 @@
 <style scoped lang="less">
 .main {
   position: absolute;
-  left: 50%;
+  top: 113px;
+  left: 720px;
   transform: translate(-25%);
-  width: 1265px;
+  width: 990px;
   height: 963px;
   font-size: 16px;
   overflow: hidden;
-  z-index: 1001;
+  z-index: 1010;
   background: url(../assets/images/c_bg1.png) no-repeat center center;
+  background-size: 100% 100%;
 }
 .d-header {
   height: 45px;
-  width: 1240px;
+  width: 960px;
   margin: 50px auto 0;
   .d-header-title {
     font-size: 26px;
@@ -84,26 +86,27 @@
   .d-header-close span {
     display: inline-block;
     margin-left: 40px;
-    width: 23px;
-    height: 23px;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
     background: url(../assets/images/close.png) no-repeat center center;
+    background-size: 100% 100%;
   }
 }
 .d-content {
-  width: 1240px;
+  width: 960px;
   height: 900px;
   margin: auto;
   .d-content-pro {
     position: relative;
-    width: 1240px;
+    width: 960px;
     height: 100px;
     margin: 40px auto 0;
     .d-content-pro-line {
       position: absolute;
       height: 10px;
-      width: 1200px;
-      margin: 40px auto 0;
+      width: 930px;
+      margin: 30px auto 0;
       border-radius: 5px;
       border: 1px solid #08786f;
       background-color: #03414c;
@@ -117,7 +120,7 @@
       li::before {
         content: "";
         position: absolute;
-        top: 30px;
+        top: 20px;
         margin-left: 25px;
         width: 30px;
         height: 30px;
@@ -135,17 +138,17 @@
   }
 
   .d-content-c {
-    width: 1240px;
+    width: 960px;
     height: 750px;
     .d-content-c-l {
-      width: 345px;
+      width: 250px;
       height: 700px;
       border: 1px solid #0b243a;
       background: url(../assets/images/d_r_bg.png);
 
       .d-content-c-l-h {
-        width: 280px;
-        height: 280px;
+        width: 220px;
+        height: 220px;
         margin: 80px auto 0;
         border-top: 4px solid #3c8de5;
         border-right: 4px solid #2779ca;
@@ -153,9 +156,9 @@
         border-left: 4px solid #49d3d0;
         border-radius: 50%;
         img {
-          margin: 11px auto 0;
-          height: 250px;
-          width: 250px;
+          margin: 6px auto 0;
+          height: 200px;
+          width: 200px;
           border: 1px solid #4796f0;
           border-radius: 50%;
         }
@@ -179,7 +182,7 @@
       }
     }
     .d-content-c-r {
-      width: 850px;
+      width: 675px;
       height: 700px;
       ul {
         width: 850px;
@@ -191,7 +194,7 @@
         padding: 0;
         li {
           float: left;
-          width: 422px;
+          width: 337px;
           height: 55px;
           border-bottom: 1px solid #1d6785;
           .d-l-l {
@@ -274,7 +277,7 @@ export default {
       this.$emit("change");
     },
     getPopulationData() {
-      let sWidth = 422;
+      let sWidth = 337;
       let colorV1 = "#1c5c88";
       let colorV2 = "#124d6f";
       let sHeight = 55;
@@ -285,6 +288,7 @@ export default {
           { name: "住房信息", isActive: false },
           { name: "来沪人口", isActive: false }
         ];
+        this.content.imgUrl = require("../assets/images/nan.jpg");
         this.content.baseInfo.name = "周远民";
         this.content.baseInfo.sex = "男";
         this.content.baseInfo.id = "230221198901234246";
@@ -463,6 +467,7 @@ export default {
           { name: "基本信息", isActive: true },
           { name: "住房信息", isActive: false }
         ];
+        this.content.imgUrl = require("../assets/images/nv.jpg");
         this.content.baseInfo.name = "张莉";
         this.content.baseInfo.sex = "女";
         this.content.baseInfo.id = "230221198901234246";
@@ -641,6 +646,7 @@ export default {
           { name: "基本信息", isActive: true },
           { name: "住房信息", isActive: false }
         ];
+        this.content.imgUrl = require("../assets/images/nan2.jpg");
         this.content.baseInfo.name = "杰克";
         this.content.baseInfo.sex = "男";
         this.content.baseInfo.id = "230221198901234246";
@@ -817,7 +823,7 @@ export default {
       }
     },
     getSpecialData() {
-      let sWidth = 422;
+      let sWidth = 337;
       let colorV1 = "#1c5c88";
       let colorV2 = "#124d6f";
       let sHeight = 55;
@@ -829,6 +835,7 @@ export default {
         { name: "来沪人口", isActive: false }
       ];
       if (this.msg.type === 1) {
+        this.content.imgUrl = require("../assets/images/nan3.png");
         this.content.menu = "基本信息";
         this.content.baseInfo.name = "周远民";
         this.content.baseInfo.sex = "男";
@@ -1007,6 +1014,7 @@ export default {
         this.content.baseInfo.name = "周远民";
         this.content.baseInfo.sex = "男";
         this.content.baseInfo.id = "230221198901234246";
+        this.content.imgUrl = require("../assets/images/nan.jpg");
         this.content.showList = [
           {
             name: "初次发现日期",
@@ -1090,6 +1098,7 @@ export default {
         this.content.baseInfo.name = "周远民";
         this.content.baseInfo.sex = "男";
         this.content.baseInfo.id = "230221198901234246";
+        this.content.imgUrl = require("../assets/images/nan2.jpg");
         this.content.showList = [
           {
             name: "初次发现日期",
@@ -1166,6 +1175,7 @@ export default {
         this.content.baseInfo.name = "周远民";
         this.content.baseInfo.sex = "男";
         this.content.baseInfo.id = "230221198901234246";
+        this.content.imgUrl = require("../assets/images/nan3.png");
         this.content.showList = [
           {
             name: "是否累犯",
@@ -1256,6 +1266,7 @@ export default {
         this.content.baseInfo.name = "周远民";
         this.content.baseInfo.sex = "男";
         this.content.baseInfo.id = "230221198901234246";
+        this.content.imgUrl = require("../assets/images/nan.jpg");
         this.content.showList = [
           {
             name: "家庭经济情况",
@@ -1367,6 +1378,7 @@ export default {
         this.content.baseInfo.name = "周远民";
         this.content.baseInfo.sex = "男";
         this.content.baseInfo.id = "230221198901234246";
+        this.content.imgUrl = require("../assets/images/nan2.jpg");
         this.content.showList = [
           {
             name: "失踪日期",
@@ -1429,6 +1441,7 @@ export default {
         this.content.baseInfo.name = "周远民";
         this.content.baseInfo.sex = "男";
         this.content.baseInfo.id = "230221198901234246";
+        this.content.imgUrl = require("../assets/images/nan3.png");
         this.content.showList = [
           {
             name: "初次发现日期",
@@ -1490,7 +1503,7 @@ export default {
       }
     },
     getRailwayData() {
-      let sWidth = 422;
+      let sWidth = 337;
       let colorV1 = "#1c5c88";
       let colorV2 = "#124d6f";
       let sHeight = 55;
@@ -1502,6 +1515,7 @@ export default {
 
       if (this.msg.type === 1) {
         this.content.baseInfo.name = "金山卫镇面段";
+        this.content.imgUrl = require("../assets/images/469x470.png");
         this.content.showList = [
           {
             name: "所属辖区",
@@ -1646,6 +1660,7 @@ export default {
         ];
       } else {
         this.content.baseInfo.name = "金山卫镇面段";
+        this.content.imgUrl = require("../assets/images/469x470.png");
         this.content.showList = [
           {
             name: "所属辖区",
@@ -1756,7 +1771,7 @@ export default {
       }
     },
     getKeyData() {
-      let sWidth = 422;
+      let sWidth = 337;
       let colorV1 = "#1c5c88";
       let colorV2 = "#124d6f";
       let sHeight = 55;
@@ -1765,6 +1780,7 @@ export default {
 
       if (this.msg.type === 1) {
         this.content.baseInfo.name = "企业信息";
+        this.content.imgUrl = require("../assets/images/469x470.png");
         this.content.showList = [
           {
             name: "企业名称",
@@ -1881,6 +1897,7 @@ export default {
         ];
       } else if (this.msg.type === 2) {
         this.content.baseInfo.name = "企业信息";
+        this.content.imgUrl = require("../assets/images/469x470.png");
         this.content.showList = [
           {
             name: "企业名称",
@@ -1948,6 +1965,7 @@ export default {
         ];
       } else {
         this.content.baseInfo.name = "企业信息";
+        this.content.imgUrl = require("../assets/images/469x470.png");
         this.content.showList = [
           {
             name: "企业名称",
@@ -2016,7 +2034,7 @@ export default {
       }
     },
     getCaseData() {
-      let sWidth = 422;
+      let sWidth = 337;
       let colorV1 = "#1c5c88";
       let colorV2 = "#124d6f";
       let sHeight = 55;
@@ -2031,6 +2049,7 @@ export default {
         this.content.baseInfo.name = "李元福";
         this.content.baseInfo.sex = "男";
         this.content.baseInfo.id = "230221198901234246";
+        this.content.imgUrl = require("../assets/images/nan2.jpg");
         this.content.showList = [
           {
             name: "报案单位",
@@ -2184,6 +2203,7 @@ export default {
         this.content.baseInfo.name = "张三";
         this.content.baseInfo.sex = "男";
         this.content.baseInfo.id = "230221198901234246";
+        this.content.imgUrl = require("../assets/images/nan3.png");
         this.content.showList = [
           {
             name: "报案单位",

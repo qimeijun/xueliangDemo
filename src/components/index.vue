@@ -1,88 +1,70 @@
 <template>
   <div class="content">
-    <Row>
+    <Row >
+    	<div v-bind:class="{bgColor2:isActive}"></div>
       <Col span="6">
-      <div class="index">
+      <div class="index"  >
         <div class="header">
-          <div class="move" @click="popUpIndex"><span>详情</span>
+          <div class="move" @click="popUpIndex1"><span>详情</span>
             <Icon type="qr-scanner"></Icon>
           </div>
         </div>
         <Row class="box">
-          <Col span="12">
-          <div class="display">
-            <div class="title">所有人口总量</div>
-            <div class="charts" id="total-population"></div>
-          </div>
+          <Col span="24">
+            <Col span="12">
+                <div class="display">
+                  <div class="title">所有人口总量</div>
+                  <div class="charts" id="total-population"></div>
+                </div>
+              </Col>
+              <Col span="12">
+                <div class="display">
+                  <div class="title">来泸人口的户籍统计</div>
+                  <div class="charts" id="household-registration"></div>
+                </div>
+              </Col>
           </Col>
-          <Col span="12">
-          <div class="display">
-            <div class="title">来泸人口的户籍统计</div>
-            <div class="charts-legend">
-              <div class="pull-right legend" v-for="(name,i) in content.cvsHouseholdRegistration.city">
-                <div class="symbol" :style="{background:content.cvsHouseholdRegistration.color[i]}"></div>{{name}} </div>
-            </div>
-            <div class="charts" id="household-registration"></div>
-          </div>
-          </Col>
+          <Col span="24">
           <Col span="12">
           <div class="display2">
             <div class="title">全部人口统计</div>
-            <Col span="9" style="height:100%">
+            <Col span="8" style="height:100%">
             <div class="charts" id="all-total-population-male"></div>
             </Col>
-            <Col span="9" style="height:100%">
+            <Col span="8" style="height:100%">
             <div class="charts" id="all-total-population-female"></div>
             </Col>
-            <Col span="6" style="height:100%">
-            <div class="m-f-p">
-              <span>&nbsp;全部人口男女比例</span>
-              <div class="male">
-                <span v-for="i in content.cvsAllTotalPopulation.male.number" :class="{active:!i}"></span>
-                <strong>{{content.cvsAllTotalPopulation.male.value}}%</strong>
-              </div>
-              <div class="female">
-                <span v-for="i in content.cvsAllTotalPopulation.female.number" :class="{active:!i}"></span>
-                <strong>{{content.cvsAllTotalPopulation.female.value}}%</strong>
-              </div>
-            </div>
+            <Col span="8" style="height:100%">
+            <div class="m-f-p" id="sex-ratio-1"></div>
             </Col>
           </div>
           </Col>
           <Col span="12">
           <div class="display2">
             <div class="title">户籍人口统计</div>
-            <Col span="9" style="height:100%">
+            <Col span="8" style="height:100%">
             <div class="charts" id="all-total-household-male"></div>
             </Col>
-            <Col span="9" style="height:100%">
+            <Col span="8" style="height:100%">
             <div class="charts" id="all-total-household-female"></div>
             </Col>
-            <Col span="6" style="height:100%">
-            <div class="m-f-p">
-              <span>&nbsp;户籍人口男女比例</span>
-              <div class="male">
-                <span v-for="i in content.cvsTotalhousehold.male.number" :class="{active:!i}"></span>
-                <strong>{{content.cvsTotalhousehold.male.value}}%</strong>
-              </div>
-              <div class="female">
-                <span v-for="i in content.cvsTotalhousehold.female.number" :class="{active:!i}"></span>
-                <strong>{{content.cvsTotalhousehold.female.value}}%</strong>
-              </div>
+            <Col span="8" style="height:100%">
+            <div class="m-f-p" id="sex-ratio-2">
             </div>
             </Col>
           </div>
+          </Col>
           </Col>
         </Row>
       </div>
       <div class="specialcrowd">
         <div class="header">
-          <div class="move" @click="popUpIndex"><span>详情</span>
+          <div class="move" @click="popUpIndex2"><span>详情</span>
             <Icon type="qr-scanner"></Icon>
           </div>
         </div>
         <Row class="box ">
-          <Col span="15">
+          <Col span="14">
           <div class="display special-p-s">
             <div class="title">特殊人群事件统计</div>
             <div class="charts" id="special-p-s"></div>
@@ -96,14 +78,14 @@
             <div class="charts" id="special-crowd"></div>
           </div>
           </Col>
-          <Col span="9">
-          <div style="margin-left:20px;">
+          <Col span="10">
+          <div style="margin-left:5px;">
             <div class="display special-trend">
               <div class="title">特殊人群趋势统计</div>
-              <div class="charts-legend" style="top:75px">
+              <!--             <div class="charts-legend" style="top:75px">
                 <div class="pull-right legend" v-for="(name,i) in content.cvsSpecialTrend.legend" style="width:80px">
                   <div class="symbol" :style="{background:content.cvsSpecialTrend.color[i]}"></div>{{name}} </div>
-              </div>
+              </div> -->
               <div class="charts" id="special-trend"> </div>
             </div>
           </div>
@@ -112,7 +94,7 @@
       </div>
       <div class="managementCase">
         <div class="header">
-          <div class="move" @click="popUpIndex"><span>详情</span>
+          <div class="move" @click="popUpIndex3"><span>详情</span>
             <Icon type="qr-scanner"></Icon>
           </div>
         </div>
@@ -121,33 +103,36 @@
             <div class="title">案件数量统计</div>
             <div class="charts" id="case-statistics"> </div>
           </div>
-          <Col span="24" style="margin-top:10px">
-          <Col span="8">
+          <Col span="24" style="margin-top:5px">
+          <Col span="10">
           <div class="display type-statistics">
             <div class="title">案件详情详细统计</div>
             <div class="radar-b"></div>
             <div class="charts" id="type-statistics"> </div>
           </div>
           </Col>
-          <Col span="16" style="padding-left:20px;">
+          <Col span="14" style="padding-left:5px;">
           <div class="display table-b">
             <div class="title">重点案件情况</div>
-            <div class="charts" style="padding:80px 30px 0px 30px;">
+            <div class="charts" style="padding:30px 10px 10px 10px">
               <div class="table">
                 <div class="th clearfix">
-                  <Col span="3"><strong>类型</strong></Col>
-                  <Col span="11"><strong>内容</strong></Col>
-                  <Col span="3"><strong>李明</strong></Col>
-                  <Col span="3"><strong>状态</strong></Col>
-                  <Col span="4"><strong>时间</strong></Col>
+                  <Col span="5"><strong>类型</strong></Col>
+                  <Col span="14"><strong>内容</strong></Col>
+                  <!-- <Col span="3"><strong>李明</strong></Col> -->
+                  <Col span="5"><strong>状态</strong></Col>
+                  <!-- <Col span="4"><strong>时间</strong></Col> -->
                   <div class="clearfix"></div>
                 </div>
                 <div class="tb clearfix" v-for="list in content.table.list">
-                  <Col span="3">{{list.type}}</Col>
-                  <Col span="11" style="text-align: left;">{{list.content}}</Col>
-                  <Col span="3">{{list.head}}</Col>
-                  <Col span="3">{{list.state}}</Col>
-                  <Col span="4">{{list.date}}</Col>
+                  <Col span="5">{{list.type}}</Col>
+                  <Col span="14" style="text-align: left;" :title="list.content">{{list.content}}</Col>
+                  <!-- <Col span="3">{{list.head}}</Col> -->
+                  <Col span="5">
+                  <span v-if="list.state" style="color:#0cdeb4"><strong>已解决</strong></span>
+                  <span v-else style="color:#ff8486"><strong>未解决</strong></span>
+                  </Col>
+                  <!-- <Col span="4">{{list.date}}</Col> -->
                   <div class="clearfix"></div>
                 </div>
               </div>
@@ -159,33 +144,7 @@
       </div>
       </Col>
       <Col span="12">
-      <div class="mainMap" style="background:#000">
-        <div class="header"></div>
-        <Row>
-          <div class="explain-b">
-            <div class="ex-content">
-              <div class="ex-title">
-                护路巡逻区域
-              </div>
-              <ul>
-                <li v-for="items in content.Mlist">
-                  <Col span="16"> {{items.name}}</Col>
-                  <Col span="8">
-                  <span v-if="items.state">正常</span>
-                  <span v-else style="color:#bf4a4a">未巡逻</span>
-                  </Col>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </Row>
-        <div class="box" id="mainMap">
-        </div>
-        <div class="map-mask"></div>
-        <div class="m-too clearfix">
-          <div class="btn" v-for="(itme,i) in ['ry-mg','s_c','case_mg','lj_wf','key_enterp','r_pt','max_video']" :class="[itme,(content.MindexMenu==i?(itme+'_act'):'')]" @click="clickBtn(i)"></div>
-        </div>
-      </div>
+      <cptMap></cptMap>
       <div class="video">
         <Row>
           <Col span="12" class="m-v">
@@ -201,10 +160,10 @@
               </ul>
             </div>
           </div>
-          <video src="http://libo.toumaps.com/xlgc/video/a.mp4" ontrols="controls" autoplay="autoplay" loop="loop"></video>
+          <video width="100%" src="http://libo.toumaps.com/xlgc/video/a.mp4" ontrols="controls" autoplay="autoplay" loop="loop"></video>
           </Col>
           <Col span="12" class="m-v">
-          <video src="http://libo.toumaps.com/xlgc/video/b.mp4" ontrols="controls" autoplay="autoplay" loop="loop"></video>
+          <video width="100%" src="http://libo.toumaps.com/xlgc/video/b.mp4" ontrols="controls" autoplay="autoplay" loop="loop"></video>
           </Col>
         </Row>
       </div>
@@ -212,7 +171,7 @@
       <Col span="6">
       <div class="keyEnterprises">
         <div class="header">
-          <div class="move" @click="popUpIndex"><span>详情</span>
+          <div class="move" @click="popUpIndex4"><span>详情</span>
             <Icon type="qr-scanner"></Icon>
           </div>
         </div>
@@ -220,34 +179,35 @@
           <Col span="8">
           <div class="display" id="zdwh">
             <div class="title">重点企业占比</div>
-            <div class="pie-name">{{content.cvsProportion.name[0]}} {{content.cvsProportion.value[0]}} 所</div>
-            <div class="pie-name" style="left:380px">{{content.cvsProportion.name[1]}} {{content.cvsProportion.value[1]}} 所</div>
-            <div class="pie-name" style="top:800px;">{{content.cvsProportion.name[2]}} {{content.cvsProportion.value[2]}} 所</div>
-            <div class="pie-name" style="top:800px;left:380px">{{content.cvsProportion.name[3]}} {{content.cvsProportion.value[3]}} 所</div>
+            <div class="pie-name">{{content.cvsProportion.name[0]}}{{content.cvsProportion.value[0]}}所</div>
+            <div class="pie-name" style="left:85px">{{content.cvsProportion.name[1]}}{{content.cvsProportion.value[1]}}所</div>
+            <div class="pie-name" style="top:244px;">{{content.cvsProportion.name[2]}}{{content.cvsProportion.value[2]}}所</div>
+            <div class="pie-name" style="top:244px;left:85px">{{content.cvsProportion.name[3]}}{{content.cvsProportion.value[3]}}所</div>
+            <div class="total">重点企业总数：{{content.cvsProportion.total}}</div>
             <div class="charts" id="proportion"></div>
           </div>
           </Col>
           <Col span="16">
-          <div class="display" id="inspect-bg" style="margin-left:20px">
+          <div class="display" id="inspect-bg" style="margin-left:5px">
             <div class="title">重点企业检查</div>
             <div class="charts" id="inspect">
               <div class="b-m tb-title clearfix">
-                <Col span="2" class="b-r ellipsis">序号</Col>
-                <Col span="9" class="b-r ellipsis">问题</Col>
-                <Col span="6" class="b-r ellipsis">企业名称</Col>
-                <Col span="2" class="b-r ellipsis">企业法人</Col>
-                <Col span="3" class="b-r ellipsis">检查时间</Col>
-                <Col span="2" class="ellipsis">状态</Col>
+                <!-- <Col span="2" class="b-r ellipsis">序号</Col> -->
+                <Col span="14" class="b-r ellipsis">问题</Col>
+                <Col span="7" class="b-r ellipsis">企业名称</Col>
+                <!-- <Col span="3" class="b-r ellipsis">企业法人</Col> -->
+                <!-- <Col span="3" class="b-r ellipsis">检查时间</Col> -->
+                <Col span="3" class="ellipsis">状态</Col>
               </div>
               <div class="b-m tbs clearfix" v-for="(items,i) in content.keyEnterprisesTb">
-                <Col span="2" class="b-r ellipsis"><strong>{{i+1}}</strong></Col>
-                <Col span="9" class="b-r ellipsis">{{items.problem}}</Col>
-                <Col span="6" class="b-r ellipsis">{{items.company}}</Col>
-                <Col span="2" class="b-r ellipsis">{{items.name}}</Col>
-                <Col span="3" class="b-r ellipsis">{{items.time}}</Col>
-                <Col span="2" class="ellipsis">
-                <span v-if="items.state">已处理</span>
-                <span v-else style="color:#bf4a4a">未处理</span>
+                <!-- <Col span="2" class="b-r ellipsis"><strong>{{i+1}}</strong></Col> -->
+                <Col span="14" class="b-r ellipsis" :title="items.problem">{{items.problem}}</Col>
+                <Col span="7" class="b-r ellipsis" :title="items.company">{{items.company}}</Col>
+                <!-- <Col span="3" class="b-r ellipsis">{{items.name}}</Col> -->
+                <!-- <Col span="3" class="b-r ellipsis">{{items.time}}</Col> -->
+                <Col span="3" class="ellipsis">
+                <span v-if="items.state" style="color:#0cdeb4"><strong>已处理</strong></span>
+                <span v-else style="color:#ff8486"><strong>未处理</strong></span>
                 </Col>
               </div>
               <div class="display2">
@@ -264,13 +224,13 @@
       </div>
       <div class="railwayProtection">
         <div class="header">
-          <div class="move" @click="popUpIndex"><span>详情</span>
+          <div class="move" @click="popUpIndex5"><span>详情</span>
             <Icon type="qr-scanner"></Icon>
           </div>
         </div>
         <Row class="box">
           <Col span="24">
-          <div class="display" style="height:430px;">
+          <div class="display" style="height:145px;">
             <div class="title">特殊人群事件统计</div>
             <div class="charts-legend">
               <div class="pull-right legend" v-for="(name,i) in content.cvsRailwaySituation.legend">
@@ -279,29 +239,29 @@
             <div class="charts" id="railway-situation"></div>
           </div>
           </Col>
-          <Col span="5">
+          <!-- <Col span="7">
           <div class="display" id="ranking">
             <div class="title">铁路时间排名</div>
-            <div class="charts" style="padding-top:90px;">
+            <div class="charts" style="padding-top:30px;">
               <ul>
-                <li class="l-title">
-                  <Col span="5" class="l-r-p">序号</Col>
-                  <Col span="15" class="l-r-p">段面</Col>
-                  <Col span="4" class="l-r-p">数量</Col>
+                <li class="l-title clearfix">
+                  <Col span="6" class="l-r-p">序号</Col>
+                  <Col span="12" class="l-r-p">段面</Col>
+                  <Col span="6" class="l-r-p">数量</Col>
                 </li>
-                <li v-for="(item,i) in content.cvsRanking">
-                  <Col span="5" class="l-r-p">{{i+1}}</Col>
-                  <Col span="15" class="l-r-p">{{item.name}}</Col>
-                  <Col span="4" class="l-r-p">{{item.numbers}}</Col>
+                <li class="clearfix" v-for="(item,i) in content.cvsRanking">
+                  <Col span="6" class="l-r-p">{{i+1}}</Col>
+                  <Col span="12" class="l-r-p">{{item.name}}</Col>
+                  <Col span="6" class="l-r-p">{{item.numbers}}</Col>
                 </li>
               </ul>
             </div>
           </div>
-          </Col>
-          <Col span="13">
+          </Col> -->
+          <Col span="15">
           <div class="display r-map-st">
             <div class="title">铁路段面状态</div>
-            <div class="charts-legend">
+            <div class="charts-legend" style="top:20px;">
               <div class="pull-right legend" v-for="(name,i) in content.cvsRState.legend">
                 <div class="symbol" :style="{background:content.cvsRState.color[i]}"></div>{{name}} </div>
             </div>
@@ -309,12 +269,12 @@
             </div>
           </div>
           </Col>
-          <Col span="6">
+          <Col span="9">
           <div class="display" id="security-bg">
             <div class="title">铁路安全指数</div>
             <div class="charts" id="security">
-              <div class="nb">
-                77%
+              <div class="nb"><span>77%</span>
+                <p style="font-size:15px">安全</p>
               </div>
             </div>
           </div>
@@ -323,7 +283,7 @@
       </div>
       <div class="wifiFixed">
         <div class="header">
-          <div class="move" @click="popUpIndex"><span>详情</span>
+          <div class="move" @click="popUpIndex6"><span>详情</span>
             <Icon type="qr-scanner"></Icon>
           </div>
         </div>
@@ -344,7 +304,7 @@
               <div class="progress-r">
                 <div class="progress">
                   <span class="f-l">当日人数</span>
-                  <span class="f-r">13442人数</span>
+                  <span class="f-r">13442人</span>
                   <div class="progress-b">
                     <div class="progress-v" style="width:40%"></div>
                   </div>
@@ -376,14 +336,14 @@
               <li style="background:#d4a659"> 阿克苏<span>21人</span></li>
               <li style="background:#8b103e">伊犁 <span>34人</span></li>
               <li style="background:#20509a">昌吉回族自治县 <span>2人</span></li>
-              <li style="background:#73bf7e">和田 <span>11人</span></li>
-              <li style="background:#065381">柯尔克孜<span>12人</span></li>
+              <!-- <li style="background:#73bf7e">和田 <span>11人</span></li> -->
+              <!--          <li style="background:#065381">柯尔克孜<span>12人</span></li>
               <li style="background:#5360c0">吐鲁番市<span>13人</span></li>
-              <li style="background:#2299ad">伊宁市 <span>13人</span></li>
+              <li style="background:#2299ad">伊宁市 <span>13人</span></li> -->
             </ul>
           </div>
           <div class="title">
-            <span>涉疆人群</span> <span class="br"> 110 </span>
+            <span>涉藏人群</span> <span class="br"> 110 </span>
           </div>
           <div class="r-list" style="margin-bottom:0px">
             <ul>
@@ -392,9 +352,9 @@
               <li style="background:#24419f">阿贝 <span>34人</span></li>
               <li style="background:#5ea152">那曲市<span>2人</span></li>
               <li style="background:#f35e60">喀什<span>11人</span></li>
-              <li style="background:#5189f8">日喀则<span>12人</span></li>
-              <li style="background:#b57535">昌都市<span>13人</span></li>
-              <li style="background:#145dac">林芝市 <span>13人</span></li>
+              <!-- <li style="background:#5189f8">日喀则<span>12人</span></li> -->
+              <!--               <li style="background:#b57535">昌都市<span>13人</span></li>
+              <li style="background:#145dac">林芝市 <span>13人</span></li> -->
             </ul>
           </div>
           </Col>
@@ -402,19 +362,31 @@
       </div>
       </Col>
     </Row>
-    <specialCrowd  v-show="specialCrowd"></specialCrowd>
+    <populationManage v-show="populationManage1" @on-close="closeDislog1"></populationManage>
+    <specialCrowd v-show="specialCrowd2" @on-close="closeDislog2"></specialCrowd>
+    <caseManage v-show="caseManage3" @on-close="closeDislog3"></caseManage>
+    <keyEnterprise v-show="keyEnterprise4" @on-close="closeDislog4"></keyEnterprise>
+    <railwayProtect v-show="railwayProtect5" @on-close="closeDislog5"></railwayProtect>
+    <wifiSniffing v-show="wifiSniffing6" @on-close="closeDislog6"></wifiSniffing>
+    
   </div>
-  
 </template>
 <script>
-// var echarts = require("echarts");
-import echarts from "echarts"
-import specialCrowd from "@/components/specialCrowd.vue";
+import cptMap from "./maps";
+import specialCrowd from "@/components/specialCrowd";
+import populationManage from "@/components/populationManage";
+import caseManage from "@/components/caseManage";
+import keyEnterprise from "@/components/keyEnterprise";
+import railwayProtect from "@/components/railwayProtect";
+import wifiSniffing from "@/components/wifiSniffing";
+
 export default {
   name: "index",
   data() {
     return {
+      animateTime: 15000,
       content: {
+        Map: null,
         cvsTotalPopulation: {
           data: [
             {
@@ -427,6 +399,22 @@ export default {
             },
             {
               value: 179795,
+              name: "来泸人员"
+            }
+          ]
+        },
+        cvsTotalPopulation2: {
+          data: [
+            {
+              value: 578564,
+              name: "户籍人口"
+            },
+            {
+              value: 8976,
+              name: "境外人员"
+            },
+            {
+              value: 1797950,
               name: "来泸人员"
             }
           ]
@@ -516,6 +504,54 @@ export default {
             }
           ]
         },
+        cvsAllTotalPopulation2: {
+          male: { number: [true, true, true, true, false], value: 80 },
+          female: { number: [true, true, true, false], value: 20 },
+          maleData: [
+            {
+              value: 56,
+              name: "1-10岁"
+            },
+            {
+              value: 365,
+              name: "10-18岁"
+            },
+            {
+              value: 700,
+              name: "18-40岁"
+            },
+            {
+              value: 600,
+              name: "40-70岁"
+            },
+            {
+              value: 100,
+              name: "70-100岁"
+            }
+          ],
+          femaleData: [
+            {
+              value: 126,
+              name: "1-10岁"
+            },
+            {
+              value: 450,
+              name: "10-18岁"
+            },
+            {
+              value: 600,
+              name: "18-40岁"
+            },
+            {
+              value: 732,
+              name: "40-70岁"
+            },
+            {
+              value: 280,
+              name: "70-100岁"
+            }
+          ]
+        },
         cvsTotalhousehold: {
           male: { number: [true, true, true, true, false], value: 65 },
           female: { number: [true, true, true, false], value: 35 },
@@ -564,6 +600,54 @@ export default {
             }
           ]
         },
+        cvsTotalhousehold2: {
+          male: { number: [true, true, true, true, false], value: 80 },
+          female: { number: [true, true, true, false], value: 20 },
+          maleData: [
+            {
+              value: 56,
+              name: "1-10岁"
+            },
+            {
+              value: 365,
+              name: "10-18岁"
+            },
+            {
+              value: 700,
+              name: "18-40岁"
+            },
+            {
+              value: 600,
+              name: "40-70岁"
+            },
+            {
+              value: 100,
+              name: "70-100岁"
+            }
+          ],
+          femaleData: [
+            {
+              value: 126,
+              name: "1-10岁"
+            },
+            {
+              value: 450,
+              name: "10-18岁"
+            },
+            {
+              value: 600,
+              name: "18-40岁"
+            },
+            {
+              value: 732,
+              name: "40-70岁"
+            },
+            {
+              value: 280,
+              name: "70-100岁"
+            }
+          ]
+        },
         // 特殊人群
         cvsSaseStatistics: {
           color: ["#145ca9", "#5475c6"],
@@ -587,7 +671,7 @@ export default {
             for (var i = 0; i < 12; i++) {
               let n = Number(i) + 1;
               n = n < 10 ? "0" + n : n;
-              arr.push("2017." + n);
+              arr.push("17." + n);
             }
             return arr;
           })()
@@ -624,6 +708,26 @@ export default {
             "#344998"
           ]
         },
+        cvsSpecialCrowd2: {
+          data: [
+            { name: "吸毒人员", value: 220 },
+            { name: "信访人员", value: 454 },
+            { name: "维稳对象", value: 351 },
+            { name: "精神病人", value: 200 },
+            { name: "失踪人员", value: 180 },
+            { name: "敏感人员", value: 120 },
+            { name: "社区服刑", value: 400 }
+          ],
+          color: [
+            "#449caa",
+            "#4990e2",
+            "#377dff",
+            "#7b7eff",
+            "#1474c8",
+            "#2d6483",
+            "#344998"
+          ]
+        },
         // 案件管理
         cvsMSaseStatistics: {
           data: function(argument) {
@@ -636,7 +740,7 @@ export default {
           xAxis: function() {
             let arr = [];
             for (var i = 0; i < 12; i++) {
-              arr.push("2017年" + (Number(i) + 1) + "月");
+              arr.push("17年" + (Number(i) + 1) + "月");
             }
             return arr;
           }
@@ -652,13 +756,24 @@ export default {
           ],
           data: [60, 73, 85, 40, 50, 60]
         },
+        cvsTypeStatistics2: {
+          indicator: [
+            { text: "抢劫", max: 100 },
+            { text: "打架斗殴", max: 100 },
+            { text: "诈骗", max: 100 },
+            { text: "赌博", max: 100 },
+            { text: "扰乱公共秩序", max: 100 },
+            { text: "色情", max: 100 }
+          ],
+          data: [50, 20, 50, 80, 60, 45]
+        },
         table: {
           list: [
             {
               type: "打架",
               content: "聚众打架斗殴",
               head: "李明",
-              state: "未解决",
+              state: 1,
               date: "2017-09-25"
             },
             {
@@ -666,89 +781,62 @@ export default {
               content:
                 "住宅区1栋5楼发生重大火灾，由于可燃物较多，火势较猛，已经造成10人严重烧伤 ",
               head: "李明",
-              state: "未解决",
+              state: 1,
               date: "2017-09-25"
             },
             {
               type: "色情",
               content: "已抓获多名来沪卖淫女子，有涉及团伙作案嫌疑，有待排查",
               head: "秦晓峰",
-              state: "未解决",
+              state: 1,
               date: "2017-09-25"
-            },
-            {
-              type: "两抢",
-              content:
-                "昨夜凌晨2点，于栈桥后方小道，发生抢劫时间，受害人金某多处受伤严重，正在调查",
-              head: "徐浪波",
-              state: "已解决",
-              date: "2017-09-25"
-            },
-            {
-              type: "赌博",
-              content:
-                "昨日工抓获6位聚赌人员，抓获地点于新奇便利店后方，拘留处理",
-              head: "黄佳林",
-              state: "已解决",
-              date: "2017-09-25"
-            },
-            {
-              type: "火灾",
-              content:
-                "住宅区1栋5楼发生重大火灾，由于可燃物较多，火势较猛，已经造成10人严重烧伤  ",
-              head: "李明",
-              state: "未解决",
-              date: "2017-09-25"
-            },
-            {
-              type: "色情",
-              content: "已抓获多名来沪卖淫女子，有涉及团伙作案嫌疑，有待排查",
-              head: "秦晓峰",
-              state: "未解决",
-              date: "2017-09-25"
+              // }, {
+              //   type: '两抢',
+              //   content: '昨夜凌晨2点，于栈桥后方小道，发生抢劫时间，受害人金某多处受伤严重，正在调查',
+              //   head: '徐浪波',
+              //   state: '已解决',
+              //   date: '2017-09-25'
+              // }, {
+              //   type: '赌博',
+              //   content: '昨日工抓获6位聚赌人员，抓获地点于新奇便利店后方，拘留处理',
+              //   head: '黄佳林',
+              //   state: '已解决',
+              //   date: '2017-09-25'
+              // }, {
+              //   type: '火灾',
+              //   content: '住宅区1栋5楼发生重大火灾，由于可燃物较多，火势较猛，已经造成10人严重烧伤  ',
+              //   head: '李明',
+              //   state: '未解决',
+              //   date: '2017-09-25'
+              // }, {
+              //   type: '色情',
+              //   content: '已抓获多名来沪卖淫女子，有涉及团伙作案嫌疑，有待排查',
+              //   head: '秦晓峰',
+              //   state: '未解决',
+              //   date: '2017-09-25'
             }
           ]
         },
-        MindexMenu: 5,
-        Mlist: [
-          { name: "金山卫镇段面", state: 1 },
-          { name: "山阳镇段面", state: 1 },
-          { name: "叶榭站段面", state: 1 },
-          { name: "顾家滨桥段面", state: 0 },
-          { name: "联建村段面", state: 0 },
-          { name: "玉兰新村段面", state: 0 },
-          { name: "德胜村段面", state: 0 },
-          { name: "高桥村段面", state: 0 },
-          { name: "下横径桥段面", state: 0 },
-          { name: "蒋庄村段面", state: 0 }
-        ],
-        Mpoints: [
-          [121.332778, 30.750986],
-          [121.301157, 30.760359],
-          [121.362673, 30.758497],
-          [121.279023, 30.728762],
-          [121.314165, 30.727024],
-          [121.379489, 30.74031],
-          [121.246971, 30.714233]
-        ],
+
         Vlist: [
           { name: "5嘉金高速 （省道）" },
           { name: "亭卫公里 （区道）" },
-          { name: "松卫公路 （省道）" },
-          { name: "A6新卫高速 （国道）" },
-          { name: "金石公路 （区道））" },
-          { name: "金廊公路 （区道）" },
+          //        { name: "松卫公路 （省道）" },
+          //        { name: "A6新卫高速 （国道）" },
+          //        { name: "金石公路 （区道））" },
+          //        { name: "金廊公路 （区道）" },
           { name: "亭枫公路 （国道）" },
           { name: "A30、A7亭枫高速公路 （国、省道）" },
           { name: "朱吕公路 （区道）" },
           { name: "漕廊公路 （区道）" },
-          { name: "A4莘奉金高速公路 （省道）" },
+          //        { name: "A4莘奉金高速公路 （省道）" },
           { name: "金山大道 （国道）" }
         ],
         // 重点企业
         cvsProportion: {
           name: ["学校", "医院", "加油站", "工厂"],
-          value: [10, 30, 80, 37]
+          value: [10, 30, 80, 37],
+          total: 912
         },
         cvsContrast: {
           legend: ["上月", "本月"],
@@ -776,48 +864,42 @@ export default {
             name: "王宇翔",
             time: "2017.04.06",
             state: 0
-          },
-          {
-            problem: "三级加油站埋地油罐距三类建筑物间距不足10米",
-            company: "中国石油天然气股份有限公司",
-            name: "周吉平",
-            time: "2017.06.15",
-            state: 1
-          },
-          {
-            problem: "作业现场有易燃易爆类化学用品",
-            company: "上海宝钢集团公司",
-            name: "袁开福",
-            time: "2017.06.05",
-            state: 1
-          },
-          {
-            problem: "生产废弃排量过大，已命令其整改",
-            company: "上海宝钢集团公司",
-            name: "李开来",
-            time: "2017.07.06",
-            state: 1
-          },
-          {
-            problem: "排污废水铜含量超过0.2毫克/升",
-            company: "上海市金山铜加工厂",
-            name: "郑永元",
-            time: "2017.08.13",
-            state: 1
-          },
-          {
-            problem: "学校操场发生严重欺凌事件，已责罚校长加强管理",
-            company: "金山中学",
-            name: "陈建斌",
-            time: "2017.10.21",
-            state: 1
-          },
-          {
-            problem: "炼钢厂作业噪音过大，影响周边居民休息，被举报",
-            company: "金山钢厂第三炼钢加工厂",
-            name: "张建武",
-            time: "2017.11.09",
-            state: 1
+            // }, {
+            //   problem: "三级加油站埋地油罐距三类建筑物间距不足10米",
+            //   company: "中国石油天然气股份有限公司",
+            //   name: "周吉平",
+            //   time: "2017.06.15",
+            //   state: 1
+            // }, {
+            //   problem: "作业现场有易燃易爆类化学用品",
+            //   company: "上海宝钢集团公司",
+            //   name: "袁开福",
+            //   time: "2017.06.05",
+            //   state: 1
+            // }, {
+            //   problem: "生产废弃排量过大，已命令其整改",
+            //   company: "上海宝钢集团公司",
+            //   name: "李开来",
+            //   time: "2017.07.06",
+            //   state: 1
+            // }, {
+            //   problem: "排污废水铜含量超过0.2毫克/升",
+            //   company: "上海市金山铜加工厂",
+            //   name: "郑永元",
+            //   time: "2017.08.13",
+            //   state: 1
+            // }, {
+            //   problem: "学校操场发生严重欺凌事件，已责罚校长加强管理",
+            //   company: "金山中学",
+            //   name: "陈建斌",
+            //   time: "2017.10.21",
+            //   state: 1
+            // }, {
+            //   problem: "炼钢厂作业噪音过大，影响周边居民休息，被举报",
+            //   company: "金山钢厂第三炼钢加工厂",
+            //   name: "张建武",
+            //   time: "2017.11.09",
+            //   state: 1
           }
         ],
 
@@ -858,12 +940,12 @@ export default {
           { name: "山阳镇段面", numbers: 27 },
           { name: "叶榭站段面", numbers: 25 },
           { name: "顾家滨桥段面", numbers: 22 },
-          { name: "联建村段面", numbers: 20 },
-          { name: "玉兰新村段面", numbers: 16 },
-          { name: "德胜村段面", numbers: 12 },
-          { name: "高桥村段面", numbers: 10 },
-          { name: "下横径桥段面", numbers: 8 },
-          { name: "蒋庄村段面", numbers: 6 }
+          { name: "联建村段面", numbers: 20 }
+          // { name: "玉兰新村段面", numbers: 16 },
+          // { name: "德胜村段面", numbers: 12 },
+          // { name: "高桥村段面", numbers: 10 },
+          // { name: "下横径桥段面", numbers: 8 },
+          // { name: "蒋庄村段面", numbers: 6 },
         ],
         cvsRState: {
           legend: ["未处理", "已解决", "没问题"],
@@ -871,7 +953,7 @@ export default {
         },
 
         // wifi
-        Rpoints: [
+        RpointsLine: [
           {
             color: "#f45e60",
             p: [
@@ -902,8 +984,13 @@ export default {
           }
         ]
       },
-      date: "",
-      MentalPatientspopUp: false
+      specialCrowd2: false,
+      populationManage1: false,
+      caseManage3: false,
+      keyEnterprise4: false,
+      railwayProtect5: false,
+      wifiSniffing6: false,
+      isActive: false
     };
   },
   mounted() {
@@ -915,7 +1002,8 @@ export default {
     this.householdRegistration();
     this.allTotalPopulation();
     this.totalhousehold();
-
+    this.sexRatio1();
+    this.sexRatio2();
     // ===============特殊人群=====================
 
     this.specialProblemStatistics();
@@ -925,7 +1013,7 @@ export default {
     this.caseStatistics();
     this.typeStatistics();
     // =================大地图===================
-    this.initMap();
+    // this.initMap();
     // =================重点企业===================
     this.proportion();
     this.contrast();
@@ -935,33 +1023,32 @@ export default {
     // ===============wifi 嗅探====================
     this.oneYearTurnover();
   },
-  components: {
-    specialCrowd
-  },
   methods: {
     // 全部人口总量
     totalPopulation() {
       let myChart = echarts.init(document.getElementById("total-population"));
       let data = this.content.cvsTotalPopulation.data;
+      let data2 = this.content.cvsTotalPopulation2.data;
       let option = {
         title: {
           text: 0,
           subtext: "人口总量",
           x: "center",
-          y: "255",
+          y: "80",
           textStyle: {
             fontWeight: "bold",
-            fontSize: 40,
+            fontSize: 12,
             color: "#8ee4fd"
           },
           subtextStyle: {
             fontWeight: "normal",
-            fontSize: 30,
+            fontSize: 11,
             color: "#8ee4fd"
           }
         },
         tooltip: {
           show: true,
+          position: ["60%", "10%"],
           trigger: "item",
           backgroundColor: "RGBA(255,255,255,0.8)",
           formatter: "{b}: {c} ({d}%)",
@@ -975,7 +1062,7 @@ export default {
             type: "pie",
             selectedMode: "single",
             center: ["50%", "55%"],
-            radius: ["35%", "70%"],
+            radius: ["37%", "60%"],
             color: ["#2c82bf", "#76defb", "#2264c2"],
 
             label: {
@@ -985,7 +1072,7 @@ export default {
                 textStyle: {
                   color: "#fff",
                   fontWeight: "bold",
-                  fontSize: 25
+                  fontSize: 12
                 }
               }
             },
@@ -999,20 +1086,22 @@ export default {
           {
             type: "pie",
             center: ["50%", "55%"],
-            radius: ["70%", "80%"],
+            radius: ["50%", "42%"],
             itemStyle: {
               normal: {
-                color: "rgba(0,0,0,0)"
+                color: "rgba(0,0,0,0)",
+                fontSize: 14
               }
             },
+
             label: {
               normal: {
                 formatter: ["{a|{b}\n{c}}"].join("\n"),
                 rich: {
                   a: {
                     color: "#8ee4fd",
-                    padding: 5,
-                    fontSize: 25
+                    padding: 2,
+                    fontSize: 12
                   }
                 }
               }
@@ -1026,6 +1115,22 @@ export default {
         option.title.text = option.title.text + e.value;
       });
       myChart.setOption(option);
+      let i = 0;
+      setInterval(function() {
+        if (!myChart) {
+          return;
+        }
+        i = i + 1;
+        if (i == 1) {
+          option.series[0].data = data2;
+          option.series[1].data = data2;
+        } else {
+          option.series[0].data = data;
+          option.series[1].data = data;
+          i = 0;
+        }
+        myChart.setOption(option);
+      }, this.animateTime);
     },
     // 来泸人口的户籍统计
     householdRegistration() {
@@ -1046,7 +1151,7 @@ export default {
           top: "20%",
           left: "3%",
           right: "4%",
-          bottom: "1%",
+          bottom: "-15",
           containLabel: true
         },
         xAxis: [
@@ -1055,9 +1160,10 @@ export default {
             data: cvsHouseholdRegistration.city,
             axisLabel: {
               color: "#7b8493",
-              margin: 25,
+              margin: 20,
               align: "center",
-              rotate: 25
+              rotate: 50,
+              fontSize: 8
             },
 
             axisTick: {
@@ -1065,7 +1171,8 @@ export default {
             },
             axisLine: {
               lineStyle: {
-                color: "#315265"
+                color: "#315265",
+                fontSize: 12
               }
             }
           }
@@ -1074,17 +1181,20 @@ export default {
           {
             type: "value",
             axisLabel: {
-              color: "#7b8493"
+              color: "#7b8493",
+              fontSize: 10
             },
             splitLine: {
-              show: true,
+              show: false,
               lineStyle: {
-                color: ["#315265"]
+                color: ["#315265"],
+                fontSize: 12
               }
             },
             axisLine: {
               lineStyle: {
-                color: "#315265"
+                color: "#315265",
+                fontSize: 12
               }
             }
           }
@@ -1092,12 +1202,12 @@ export default {
         series: [
           {
             type: "bar",
-            barWidth: "35",
+            barWidth: 10,
             label: {
               normal: {
                 show: true,
                 position: "top",
-                formatter: "{c} 人",
+                formatter: "{c}",
                 color: "#73eae0"
               }
             },
@@ -1122,6 +1232,24 @@ export default {
       };
 
       myChart.setOption(option);
+      setInterval(function() {
+        if (!myChart) {
+          return;
+        }
+        let arr = [];
+        cvsHouseholdRegistration.city.forEach((e, i) => {
+          let data = {
+            name: e,
+            value: parseInt(Math.random() * 10 * (Math.random() + 1 * 10)),
+            itemStyle: {
+              color: color[i]
+            }
+          };
+          arr.push(data);
+        });
+        option.series[0].data = arr;
+        myChart.setOption(option);
+      }, this.animateTime);
     },
     // 全部人口统计
     allTotalPopulation() {
@@ -1129,6 +1257,7 @@ export default {
         document.getElementById("all-total-population-male")
       );
       let data = this.content.cvsAllTotalPopulation.maleData;
+      let data_2 = this.content.cvsAllTotalPopulation2.maleData;
       let giftImageUrl =
         "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAABCCAYAAAA2RtSlAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjRGQzFBQ0U0MEJEMzExRThBQkU4QTc0M0Q1MTQ2MTUzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjRGQzFBQ0U1MEJEMzExRThBQkU4QTc0M0Q1MTQ2MTUzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NEZDMUFDRTIwQkQzMTFFOEFCRThBNzQzRDUxNDYxNTMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NEZDMUFDRTMwQkQzMTFFOEFCRThBNzQzRDUxNDYxNTMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4mhbU9AAAB30lEQVR42uyaPUsDQRCGLyYQLC30B1ikUPALEdJY6D+wsQkINlqoYKUWWsfqQCsrC1GwEVIEbBT8aBSxEVEQLOwECzkUiZqc78KIIne3O5ddsJiFl0luJ+8+O3e3yXLJhGHocdvYam0cYR4aoEOXkL+3kN/lemW4ABh8DWE2pnsdEHPOADB4CWFLk1YCxLapZwuzYosGOUtOKoDZdyA8Gvq2owpPtivQ5iKXA6Bmb1KukFEpcwCU9Bnh1CD1BLmBq4twGWok9Ku+FY4hCwAzO0KYhuoR3erYFOW4W4jojuimxahfedBKqBaha+croe2WS5ilOj0j0CjUCeWZ3jXoHjqADlGdhnEFMPgQwibUZWmi6tRMAuJcC4DBBxGOoVbL1X6DhgFxobsLfAeDe+Tpm9yGRYfXXNEEIOsQINvsSmi9CYAJwARUTuFdps82DRBwvt///H4I5BoQAAEQAAEQAAFIA/AZscFI2z403pEAG79e39AeIa6dkeKa2qjexnhHA2DjMINQgHqgPrx/TRhgnxS3m35B6CWvAnnr94ZIvLN1juH1jnAld4EACIAACIAACIAACIAACMC/BcgZ5j0wj+v62BWoQOrPCd/PC9UDqCq0Q6p6Pw8065RbMTH+EmAAVTKHpcZlcyQAAAAASUVORK5CYII=";
 
@@ -1138,6 +1267,7 @@ export default {
           trigger: "item",
           backgroundColor: "RGBA(255,255,255,0.8)",
           formatter: "{b}: {c} ({d}%)",
+          position: ["10%", "0%"],
           textStyle: {
             color: "#333"
           }
@@ -1148,10 +1278,10 @@ export default {
               type: "image",
               style: {
                 image: giftImageUrl,
-                width: 25
+                width: 10
               },
-              left: "48%",
-              top: "53%"
+              left: "46%",
+              top: "52%"
             }
           ]
         },
@@ -1160,16 +1290,17 @@ export default {
             type: "pie",
             selectedMode: "single",
             center: ["52%", "60%"],
-            radius: ["25%", "55%"],
+            radius: ["35%", "75%"],
             roseType: true,
             color: ["#366dd2", "#72a2c8", "#254689", "#557dee", "#20509a"],
             label: {
               normal: {
+                show: false,
                 position: "inner",
                 formatter: "{d}%",
                 textStyle: {
                   color: "#fff",
-                  fontSize: 16
+                  fontSize: 8
                 }
               }
             },
@@ -1179,39 +1310,24 @@ export default {
               }
             },
             data: data
-          },
-          {
-            type: "pie",
-            center: ["52%", "60%"],
-            radius: ["50%", "50%"],
-            labelLine: {
-              show: false,
-              length: 30,
-              length2: 0,
-              smooth: true
-            },
-            itemStyle: {
-              normal: {
-                // color: 'rgba(0,0,0,0)'
-              }
-            },
-            label: {
-              normal: {
-                formatter: ["{a|{b}\n{c}}"].join("\n"),
-                rich: {
-                  a: {
-                    color: "#b6bcbc",
-                    padding: 2,
-                    fontSize: 14
-                  }
-                }
-              }
-            },
-            data: data
           }
         ]
       };
       myChart.setOption(option);
+      let i = 0;
+      setInterval(function() {
+        if (!myChart) {
+          return;
+        }
+        i = i + 1;
+        if (i == 1) {
+          option.series[0].data = data_2;
+        } else {
+          option.series[0].data = data;
+          i = 0;
+        }
+        myChart.setOption(option);
+      }, this.animateTime);
 
       // 女性==================
 
@@ -1219,6 +1335,7 @@ export default {
         document.getElementById("all-total-population-female")
       );
       let data2 = this.content.cvsAllTotalPopulation.femaleData;
+      let data2_2 = this.content.cvsAllTotalPopulation2.femaleData;
       let giftImageUrl2 =
         "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAABCCAYAAAA2RtSlAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjU1NjZFQUZEMEJEMzExRTg4N0MxQjQxN0EzMDBCOUMxIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjU1NjZFQUZFMEJEMzExRTg4N0MxQjQxN0EzMDBCOUMxIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NTU2NkVBRkIwQkQzMTFFODg3QzFCNDE3QTMwMEI5QzEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTU2NkVBRkMwQkQzMTFFODg3QzFCNDE3QTMwMEI5QzEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5m7lYYAAAC/klEQVR42uyZTUhVQRTHr9dqUSFIpQujZxlFr6QQauN7PqEPRBBUiD53hUJrlaSNrvpw50YRWtr2KRTRrqIWhS1aVNAHZBoFbVMES/sfOBeGacaZuW+GCO6BP1zHuef87sycuWfuq/py+WbkaJuhfugKdITb3kB3oUlo1cXZJsfg26EHUJvUfhQah85CndBPW4exI8CkIrhoRWjKxaELwEHokkW/C9zXO8BJh76nQwDsdOi7IwTAokPfryEAHlqm2CpnineAb9Ati363uW+QNByFJgxpOhJyI/oNXYOmoavQYWknfOa6rboCJPacVbHZAByCLkJ5qNphpN5C96B3aQGqeNEN8rWr9UI3oDHoOrTuuggHoKGUwcWHGGJfTllAQz0c+bNh3fTpANqhWo8AtezTGqA78m/dtgA0bz0BAHpU60kFcAJqCABAPo/bAIR4ejE1jQDyXC1DhRTB6J4l0zqQAfKKcuoR1JwCoJnvlcu6/EYAvQpHZV0KGYzumTFNQ2yY/19cXKQFuM8+tDFEgD1Qi9T5Kdd39SkA6llPpPYWjvUXgG74SxWs+gL70GaaCWA25fCL0zC70TpIAOqgVqnTK2jBAwBV03OKkakTAboUC5KGbn+Fu2ID+ygr0r9LBFAN/0yFT2+VjgRQA52S/vmBC82CB4ASl2fvpXaKWRPzcXqL4ukjTyNQlHwmRjE7Y83Lh+asEcp5AMixL2U6EkCH1PgdeuHp6cV18FJxYuoggBVF7q8FAFhT7AkrBHAOes0Nn4TzX8kzQHJu/MjXFPM8nQseQ8egbfzup/p9N8+bL8vx/v8ZOgBtTWoFcfNZEg4PPoc/seTb0rpYqMSGIYsCTIP1ueCfAdD8NwUAaGLfRoBiwKq43QagFBCgaHM83wfNC39TyuzSOJwX0kxlPzi1E9trA3BGUcuXNQEahdRSWZ/mVZz6I5V3ywAygAwgA8gAMoAMIAP4LwAWNO2LmuvIot0JgD5W3ZGKS/pptl+q/cSfa5f5njmT8z8CDABgQ4DWHERJfAAAAABJRU5ErkJggg==";
 
@@ -1228,6 +1345,7 @@ export default {
           trigger: "item",
           backgroundColor: "RGBA(255,255,255,0.8)",
           formatter: "{b}: {c} ({d}%)",
+          position: ["10%", "0%"],
           textStyle: {
             color: "#333"
           }
@@ -1238,10 +1356,10 @@ export default {
               type: "image",
               style: {
                 image: giftImageUrl2,
-                width: 25
+                width: 10
               },
-              left: "48%",
-              top: "53%"
+              left: "46%",
+              top: "52%"
             }
           ]
         },
@@ -1250,16 +1368,17 @@ export default {
             type: "pie",
             selectedMode: "single",
             center: ["52%", "60%"],
-            radius: ["25%", "55%"],
+            radius: ["35%", "75%"],
             roseType: true,
             color: ["#5dd5d4", "#8b103e", "#ff9a2c", "#e34856", "#065381"],
             label: {
               normal: {
+                show: false,
                 position: "inner",
                 formatter: "{d}%",
                 textStyle: {
                   color: "#fff",
-                  fontSize: 16
+                  fontSize: 8
                 }
               }
             },
@@ -1269,39 +1388,24 @@ export default {
               }
             },
             data: data2
-          },
-          {
-            type: "pie",
-            center: ["52%", "60%"],
-            radius: ["50%", "50%"],
-            labelLine: {
-              show: false,
-              length: 30,
-              length2: 0,
-              smooth: true
-            },
-            itemStyle: {
-              normal: {
-                // color: 'rgba(0,0,0,0)'
-              }
-            },
-            label: {
-              normal: {
-                formatter: ["{a|{b}\n{c}}"].join("\n"),
-                rich: {
-                  a: {
-                    color: "#b6bcbc",
-                    padding: 2,
-                    fontSize: 14
-                  }
-                }
-              }
-            },
-            data: data2
           }
         ]
       };
       myChart2.setOption(option2);
+      let j = 0;
+      setInterval(function() {
+        if (!myChart) {
+          return;
+        }
+        j = j + 1;
+        if (j == 1) {
+          option2.series[0].data = data2_2;
+        } else {
+          option2.series[0].data = data2;
+          j = 0;
+        }
+        myChart2.setOption(option2);
+      }, this.animateTime);
     },
     // 户籍人口统计
     totalhousehold() {
@@ -1309,6 +1413,7 @@ export default {
         document.getElementById("all-total-household-male")
       );
       let data = this.content.cvsTotalhousehold.maleData;
+      let data_2 = this.content.cvsTotalhousehold2.maleData;
       let giftImageUrl =
         "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAABCCAYAAAA2RtSlAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjRGQzFBQ0U0MEJEMzExRThBQkU4QTc0M0Q1MTQ2MTUzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjRGQzFBQ0U1MEJEMzExRThBQkU4QTc0M0Q1MTQ2MTUzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NEZDMUFDRTIwQkQzMTFFOEFCRThBNzQzRDUxNDYxNTMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NEZDMUFDRTMwQkQzMTFFOEFCRThBNzQzRDUxNDYxNTMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4mhbU9AAAB30lEQVR42uyaPUsDQRCGLyYQLC30B1ikUPALEdJY6D+wsQkINlqoYKUWWsfqQCsrC1GwEVIEbBT8aBSxEVEQLOwECzkUiZqc78KIIne3O5ddsJiFl0luJ+8+O3e3yXLJhGHocdvYam0cYR4aoEOXkL+3kN/lemW4ABh8DWE2pnsdEHPOADB4CWFLk1YCxLapZwuzYosGOUtOKoDZdyA8Gvq2owpPtivQ5iKXA6Bmb1KukFEpcwCU9Bnh1CD1BLmBq4twGWok9Ku+FY4hCwAzO0KYhuoR3erYFOW4W4jojuimxahfedBKqBaha+croe2WS5ilOj0j0CjUCeWZ3jXoHjqADlGdhnEFMPgQwibUZWmi6tRMAuJcC4DBBxGOoVbL1X6DhgFxobsLfAeDe+Tpm9yGRYfXXNEEIOsQINvsSmi9CYAJwARUTuFdps82DRBwvt///H4I5BoQAAEQAAEQAAFIA/AZscFI2z403pEAG79e39AeIa6dkeKa2qjexnhHA2DjMINQgHqgPrx/TRhgnxS3m35B6CWvAnnr94ZIvLN1juH1jnAld4EACIAACIAACIAACIAACMC/BcgZ5j0wj+v62BWoQOrPCd/PC9UDqCq0Q6p6Pw8065RbMTH+EmAAVTKHpcZlcyQAAAAASUVORK5CYII=";
 
@@ -1328,10 +1433,10 @@ export default {
               type: "image",
               style: {
                 image: giftImageUrl,
-                width: 25
+                width: 10
               },
-              left: "48%",
-              top: "53%"
+              left: "46%",
+              top: "52%"
             }
           ]
         },
@@ -1340,16 +1445,17 @@ export default {
             type: "pie",
             selectedMode: "single",
             center: ["52%", "60%"],
-            radius: ["25%", "55%"],
+            radius: ["35%", "75%"],
             roseType: true,
             color: ["#366dd2", "#72a2c8", "#254689", "#557dee", "#20509a"],
             label: {
               normal: {
+                show: false,
                 position: "inner",
                 formatter: "{d}%",
                 textStyle: {
                   color: "#fff",
-                  fontSize: 16
+                  fontSize: 8
                 }
               }
             },
@@ -1359,39 +1465,24 @@ export default {
               }
             },
             data: data
-          },
-          {
-            type: "pie",
-            center: ["52%", "60%"],
-            radius: ["50%", "50%"],
-            labelLine: {
-              show: false,
-              length: 30,
-              length2: 0,
-              smooth: true
-            },
-            itemStyle: {
-              normal: {
-                // color: 'rgba(0,0,0,0)'
-              }
-            },
-            label: {
-              normal: {
-                formatter: ["{a|{b}\n{c}}"].join("\n"),
-                rich: {
-                  a: {
-                    color: "#b6bcbc",
-                    padding: 2,
-                    fontSize: 14
-                  }
-                }
-              }
-            },
-            data: data
           }
         ]
       };
       myChart.setOption(option);
+      let i = 0;
+      setInterval(function() {
+        if (!myChart) {
+          return;
+        }
+        i = i + 1;
+        if (i == 1) {
+          option.series[0].data = data_2;
+        } else {
+          option.series[0].data = data;
+          i = 0;
+        }
+        myChart.setOption(option);
+      }, this.animateTime);
 
       // 女性==================
 
@@ -1399,6 +1490,7 @@ export default {
         document.getElementById("all-total-household-female")
       );
       let data2 = this.content.cvsTotalhousehold.femaleData;
+      let data2_2 = this.content.cvsTotalhousehold2.femaleData;
       let giftImageUrl2 =
         "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAABCCAYAAAA2RtSlAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjU1NjZFQUZEMEJEMzExRTg4N0MxQjQxN0EzMDBCOUMxIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjU1NjZFQUZFMEJEMzExRTg4N0MxQjQxN0EzMDBCOUMxIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NTU2NkVBRkIwQkQzMTFFODg3QzFCNDE3QTMwMEI5QzEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTU2NkVBRkMwQkQzMTFFODg3QzFCNDE3QTMwMEI5QzEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5m7lYYAAAC/klEQVR42uyZTUhVQRTHr9dqUSFIpQujZxlFr6QQauN7PqEPRBBUiD53hUJrlaSNrvpw50YRWtr2KRTRrqIWhS1aVNAHZBoFbVMES/sfOBeGacaZuW+GCO6BP1zHuef87sycuWfuq/py+WbkaJuhfugKdITb3kB3oUlo1cXZJsfg26EHUJvUfhQah85CndBPW4exI8CkIrhoRWjKxaELwEHokkW/C9zXO8BJh76nQwDsdOi7IwTAokPfryEAHlqm2CpnineAb9Ati363uW+QNByFJgxpOhJyI/oNXYOmoavQYWknfOa6rboCJPacVbHZAByCLkJ5qNphpN5C96B3aQGqeNEN8rWr9UI3oDHoOrTuuggHoKGUwcWHGGJfTllAQz0c+bNh3fTpANqhWo8AtezTGqA78m/dtgA0bz0BAHpU60kFcAJqCABAPo/bAIR4ejE1jQDyXC1DhRTB6J4l0zqQAfKKcuoR1JwCoJnvlcu6/EYAvQpHZV0KGYzumTFNQ2yY/19cXKQFuM8+tDFEgD1Qi9T5Kdd39SkA6llPpPYWjvUXgG74SxWs+gL70GaaCWA25fCL0zC70TpIAOqgVqnTK2jBAwBV03OKkakTAboUC5KGbn+Fu2ID+ygr0r9LBFAN/0yFT2+VjgRQA52S/vmBC82CB4ASl2fvpXaKWRPzcXqL4ukjTyNQlHwmRjE7Y83Lh+asEcp5AMixL2U6EkCH1PgdeuHp6cV18FJxYuoggBVF7q8FAFhT7AkrBHAOes0Nn4TzX8kzQHJu/MjXFPM8nQseQ8egbfzup/p9N8+bL8vx/v8ZOgBtTWoFcfNZEg4PPoc/seTb0rpYqMSGIYsCTIP1ueCfAdD8NwUAaGLfRoBiwKq43QagFBCgaHM83wfNC39TyuzSOJwX0kxlPzi1E9trA3BGUcuXNQEahdRSWZ/mVZz6I5V3ywAygAwgA8gAMoAMIAP4LwAWNO2LmuvIot0JgD5W3ZGKS/pptl+q/cSfa5f5njmT8z8CDABgQ4DWHERJfAAAAABJRU5ErkJggg==";
 
@@ -1418,10 +1510,10 @@ export default {
               type: "image",
               style: {
                 image: giftImageUrl2,
-                width: 25
+                width: 10
               },
-              left: "48%",
-              top: "53%"
+              left: "46%",
+              top: "52%"
             }
           ]
         },
@@ -1430,16 +1522,17 @@ export default {
             type: "pie",
             selectedMode: "single",
             center: ["52%", "60%"],
-            radius: ["25%", "55%"],
+            radius: ["35%", "75%"],
             roseType: true,
             color: ["#5dd5d4", "#8b103e", "#ff9a2c", "#e34856", "#065381"],
             label: {
               normal: {
+                show: false,
                 position: "inner",
                 formatter: "{d}%",
                 textStyle: {
                   color: "#fff",
-                  fontSize: 16
+                  fontSize: 8
                 }
               }
             },
@@ -1449,43 +1542,291 @@ export default {
               }
             },
             data: data2
-          },
-          {
-            type: "pie",
-            center: ["52%", "60%"],
-            radius: ["50%", "50%"],
-            labelLine: {
-              show: false,
-              length: 30,
-              length2: 0,
-              smooth: true
-            },
-            itemStyle: {
-              normal: {
-                // color: 'rgba(0,0,0,0)'
-              }
-            },
-            label: {
-              normal: {
-                formatter: ["{a|{b}\n{c}}"].join("\n"),
-                rich: {
-                  a: {
-                    color: "#b6bcbc",
-                    padding: 2,
-                    fontSize: 14
-                  }
-                }
-              }
-            },
-            data: data2
           }
         ]
       };
       myChart2.setOption(option2);
+      let j = 0;
+      setInterval(function() {
+        if (!myChart) {
+          return;
+        }
+        j = j + 1;
+        if (j == 1) {
+          option2.series[0].data = data2_2;
+        } else {
+          option2.series[0].data = data2;
+          j = 0;
+        }
+        myChart2.setOption(option2);
+      }, this.animateTime);
     },
-    popUpIndex() {
-      this.specialCrowdpopUp = true;
+    // 男女性别比例1
+    sexRatio1() {
+      let myChart = echarts.init(document.getElementById("sex-ratio-1"));
+      let pathSymbols = {
+        male:
+          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAApCAYAAAA1bQl+AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjkzM0M2MDI1MEJEMzExRTg4QzE5OUYwODJGNDNDMDE3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjkzM0M2MDI2MEJEMzExRTg4QzE5OUYwODJGNDNDMDE3Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OTMzQzYwMjMwQkQzMTFFODhDMTk5RjA4MkY0M0MwMTciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6OTMzQzYwMjQwQkQzMTFFODhDMTk5RjA4MkY0M0MwMTciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7WB5Z1AAABO0lEQVR42mL8//8/Ay4Q1PlTGkhNBmIfqNAWIM5dV87+FJceRlwGAg3jAFIXgFgdTeomEOsDDf2JTR8TA27gg8UwBqiYLy5N+AyUxiMnRY6B58mRw2kgMIwOAamVWKRWAOUO49LHwoAfRAPxXqQw2wTE8/FpwIhlYOyqgWIRiLkJWPYViC8CXXsLq4FAg2SA1BIgtmcgDRwA4ligwU/Qw3ANGYaBgAMQr8YWKeYM5AMLYpINWYAuBj4G4iwi9GZB1RI08B8QPyfCwOdQtfT38qiBowaSYOB7KP0Oi7o/UIwO3qHpRSmxQSWGGbR8M0HTuBVK+6OJ+0GLr1N462VgYRsApNYjCW3EYmAgsFDdMBrLowaOGjhqIFEAV4PzL5bKn5AavC48AcQPoOzfQLwWin9DxR5A1WAAgAADAILKU5TjDy3PAAAAAElFTkSuQmCC",
+        female:
+          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAABCCAYAAAA2RtSlAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjU1NjZFQUZEMEJEMzExRTg4N0MxQjQxN0EzMDBCOUMxIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjU1NjZFQUZFMEJEMzExRTg4N0MxQjQxN0EzMDBCOUMxIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NTU2NkVBRkIwQkQzMTFFODg3QzFCNDE3QTMwMEI5QzEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTU2NkVBRkMwQkQzMTFFODg3QzFCNDE3QTMwMEI5QzEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5m7lYYAAAC/klEQVR42uyZTUhVQRTHr9dqUSFIpQujZxlFr6QQauN7PqEPRBBUiD53hUJrlaSNrvpw50YRWtr2KRTRrqIWhS1aVNAHZBoFbVMES/sfOBeGacaZuW+GCO6BP1zHuef87sycuWfuq/py+WbkaJuhfugKdITb3kB3oUlo1cXZJsfg26EHUJvUfhQah85CndBPW4exI8CkIrhoRWjKxaELwEHokkW/C9zXO8BJh76nQwDsdOi7IwTAokPfryEAHlqm2CpnineAb9Ati363uW+QNByFJgxpOhJyI/oNXYOmoavQYWknfOa6rboCJPacVbHZAByCLkJ5qNphpN5C96B3aQGqeNEN8rWr9UI3oDHoOrTuuggHoKGUwcWHGGJfTllAQz0c+bNh3fTpANqhWo8AtezTGqA78m/dtgA0bz0BAHpU60kFcAJqCABAPo/bAIR4ejE1jQDyXC1DhRTB6J4l0zqQAfKKcuoR1JwCoJnvlcu6/EYAvQpHZV0KGYzumTFNQ2yY/19cXKQFuM8+tDFEgD1Qi9T5Kdd39SkA6llPpPYWjvUXgG74SxWs+gL70GaaCWA25fCL0zC70TpIAOqgVqnTK2jBAwBV03OKkakTAboUC5KGbn+Fu2ID+ygr0r9LBFAN/0yFT2+VjgRQA52S/vmBC82CB4ASl2fvpXaKWRPzcXqL4ukjTyNQlHwmRjE7Y83Lh+asEcp5AMixL2U6EkCH1PgdeuHp6cV18FJxYuoggBVF7q8FAFhT7AkrBHAOes0Nn4TzX8kzQHJu/MjXFPM8nQseQ8egbfzup/p9N8+bL8vx/v8ZOgBtTWoFcfNZEg4PPoc/seTb0rpYqMSGIYsCTIP1ueCfAdD8NwUAaGLfRoBiwKq43QagFBCgaHM83wfNC39TyuzSOJwX0kxlPzi1E9trA3BGUcuXNQEahdRSWZ/mVZz6I5V3ywAygAwgA8gAMoAMIAP4LwAWNO2LmuvIot0JgD5W3ZGKS/pptl+q/cSfa5f5njmT8z8CDABgQ4DWHERJfAAAAABJRU5ErkJggg=="
+      };
+      let labelSetting = {
+        normal: {
+          show: true,
+          position: "right",
+          offset: [10, 0],
+          textStyle: {
+            fontSize: 16
+          }
+        }
+      };
+
+      let option = {
+        title: {
+          text: "男女比例",
+          top: 5,
+          left: 0,
+          textStyle: {
+            color: "#fff",
+            fontSize: "8px"
+          }
+        },
+        tooltip: {
+          backgroundColor: "RGBA(255,255,255,0.8)",
+          formatter: "{a}: {c}%",
+          textStyle: {
+            color: "#333"
+          }
+        },
+        grid: {
+          type: "image",
+          containLabel: true,
+          left: "3%",
+          top: 80
+        },
+        yAxis: {
+          splitLine: { show: false },
+          axisLabel: { show: false },
+          axisTick: { show: false },
+          axisLine: { show: false },
+          data: ["reindeer"]
+        },
+        xAxis: {
+          splitLine: { show: false },
+          axisLabel: { show: false },
+          axisTick: { show: false },
+          axisLine: { show: false }
+        },
+        series: [
+          {
+            name: "男",
+            type: "pictorialBar",
+            label: labelSetting,
+            symbolRepeat: true,
+            symbolSize: ["10", "25"],
+            barCategoryGap: "-20",
+            label: {
+              show: false
+            },
+            data: [
+              {
+                value: 40,
+                symbol: "image://" + pathSymbols.male
+              }
+            ]
+          },
+          {
+            name: "女",
+            type: "pictorialBar",
+            barGap: "10%",
+            label: labelSetting,
+            symbolRepeat: true,
+            symbolSize: ["10", "25"],
+            // barCategoryGap: '-40',
+            label: {
+              show: false
+            },
+            data: [
+              {
+                value: 60,
+                symbol: "image://" + pathSymbols.female
+              }
+            ]
+          }
+        ]
+      };
+      myChart.setOption(option);
+      let j = 0;
+      setInterval(function() {
+        if (!myChart) {
+          return;
+        }
+        j = j + 1;
+        if (j == 1) {
+          option.series[0].data[0].value = 30;
+          option.series[1].data[0].value = 70;
+        } else {
+          option.series[0].data[0].value = 40;
+          option.series[1].data[0].value = 60;
+          j = 0;
+        }
+        myChart.setOption(option);
+      }, this.animateTime);
     },
+    // 男女性别比例2
+    sexRatio2() {
+      let myChart = echarts.init(document.getElementById("sex-ratio-2"));
+      let pathSymbols = {
+        male:
+          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAApCAYAAAA1bQl+AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjkzM0M2MDI1MEJEMzExRTg4QzE5OUYwODJGNDNDMDE3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjkzM0M2MDI2MEJEMzExRTg4QzE5OUYwODJGNDNDMDE3Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OTMzQzYwMjMwQkQzMTFFODhDMTk5RjA4MkY0M0MwMTciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6OTMzQzYwMjQwQkQzMTFFODhDMTk5RjA4MkY0M0MwMTciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7WB5Z1AAABO0lEQVR42mL8//8/Ay4Q1PlTGkhNBmIfqNAWIM5dV87+FJceRlwGAg3jAFIXgFgdTeomEOsDDf2JTR8TA27gg8UwBqiYLy5N+AyUxiMnRY6B58mRw2kgMIwOAamVWKRWAOUO49LHwoAfRAPxXqQw2wTE8/FpwIhlYOyqgWIRiLkJWPYViC8CXXsLq4FAg2SA1BIgtmcgDRwA4ligwU/Qw3ANGYaBgAMQr8YWKeYM5AMLYpINWYAuBj4G4iwi9GZB1RI08B8QPyfCwOdQtfT38qiBowaSYOB7KP0Oi7o/UIwO3qHpRSmxQSWGGbR8M0HTuBVK+6OJ+0GLr1N462VgYRsApNYjCW3EYmAgsFDdMBrLowaOGjhqIFEAV4PzL5bKn5AavC48AcQPoOzfQLwWin9DxR5A1WAAgAADAILKU5TjDy3PAAAAAElFTkSuQmCC",
+        female:
+          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAABCCAYAAAA2RtSlAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjU1NjZFQUZEMEJEMzExRTg4N0MxQjQxN0EzMDBCOUMxIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjU1NjZFQUZFMEJEMzExRTg4N0MxQjQxN0EzMDBCOUMxIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NTU2NkVBRkIwQkQzMTFFODg3QzFCNDE3QTMwMEI5QzEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTU2NkVBRkMwQkQzMTFFODg3QzFCNDE3QTMwMEI5QzEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5m7lYYAAAC/klEQVR42uyZTUhVQRTHr9dqUSFIpQujZxlFr6QQauN7PqEPRBBUiD53hUJrlaSNrvpw50YRWtr2KRTRrqIWhS1aVNAHZBoFbVMES/sfOBeGacaZuW+GCO6BP1zHuef87sycuWfuq/py+WbkaJuhfugKdITb3kB3oUlo1cXZJsfg26EHUJvUfhQah85CndBPW4exI8CkIrhoRWjKxaELwEHokkW/C9zXO8BJh76nQwDsdOi7IwTAokPfryEAHlqm2CpnineAb9Ati363uW+QNByFJgxpOhJyI/oNXYOmoavQYWknfOa6rboCJPacVbHZAByCLkJ5qNphpN5C96B3aQGqeNEN8rWr9UI3oDHoOrTuuggHoKGUwcWHGGJfTllAQz0c+bNh3fTpANqhWo8AtezTGqA78m/dtgA0bz0BAHpU60kFcAJqCABAPo/bAIR4ejE1jQDyXC1DhRTB6J4l0zqQAfKKcuoR1JwCoJnvlcu6/EYAvQpHZV0KGYzumTFNQ2yY/19cXKQFuM8+tDFEgD1Qi9T5Kdd39SkA6llPpPYWjvUXgG74SxWs+gL70GaaCWA25fCL0zC70TpIAOqgVqnTK2jBAwBV03OKkakTAboUC5KGbn+Fu2ID+ygr0r9LBFAN/0yFT2+VjgRQA52S/vmBC82CB4ASl2fvpXaKWRPzcXqL4ukjTyNQlHwmRjE7Y83Lh+asEcp5AMixL2U6EkCH1PgdeuHp6cV18FJxYuoggBVF7q8FAFhT7AkrBHAOes0Nn4TzX8kzQHJu/MjXFPM8nQseQ8egbfzup/p9N8+bL8vx/v8ZOgBtTWoFcfNZEg4PPoc/seTb0rpYqMSGIYsCTIP1ueCfAdD8NwUAaGLfRoBiwKq43QagFBCgaHM83wfNC39TyuzSOJwX0kxlPzi1E9trA3BGUcuXNQEahdRSWZ/mVZz6I5V3ywAygAwgA8gAMoAMIAP4LwAWNO2LmuvIot0JgD5W3ZGKS/pptl+q/cSfa5f5njmT8z8CDABgQ4DWHERJfAAAAABJRU5ErkJggg=="
+      };
+      let labelSetting = {
+        normal: {
+          show: true,
+          position: "right",
+          offset: [10, 0],
+          textStyle: {
+            fontSize: 16
+          }
+        }
+      };
+
+      let option = {
+        title: {
+          text: "男女比例",
+          top: 5,
+          left: 0,
+          textStyle: {
+            color: "#fff",
+            fontSize: "8px"
+          }
+        },
+        tooltip: {
+          backgroundColor: "RGBA(255,255,255,0.8)",
+          formatter: "{a}: {c}%",
+          textStyle: {
+            color: "#333"
+          }
+        },
+        grid: {
+          type: "image",
+          containLabel: true,
+          left: "0%",
+          top: 80
+        },
+        yAxis: {
+          splitLine: { show: false },
+          axisLabel: { show: false },
+          axisTick: { show: false },
+          axisLine: { show: false },
+          data: ["reindeer"]
+        },
+        xAxis: {
+          splitLine: { show: false },
+          axisLabel: { show: false },
+          axisTick: { show: false },
+          axisLine: { show: false }
+        },
+        series: [
+          {
+            name: "男",
+            type: "pictorialBar",
+            label: labelSetting,
+            symbolRepeat: true,
+            symbolSize: ["10", "25"],
+            barCategoryGap: "-20",
+            label: {
+              show: false
+            },
+            data: [
+              {
+                value: 40,
+                symbol: "image://" + pathSymbols.male
+              }
+            ]
+          },
+          {
+            name: "女",
+            type: "pictorialBar",
+            barGap: "10%",
+            label: labelSetting,
+            symbolRepeat: true,
+            symbolSize: ["10", "25"],
+            // barCategoryGap: '-40',
+            label: {
+              show: false
+            },
+            data: [
+              {
+                value: 60,
+                symbol: "image://" + pathSymbols.female
+              }
+            ]
+          }
+        ]
+      };
+      myChart.setOption(option);
+      let j = 0;
+      setInterval(function() {
+        if (!myChart) {
+          return;
+        }
+        j = j + 1;
+        if (j == 1) {
+          option.series[0].data[0].value = 30;
+          option.series[1].data[0].value = 70;
+        } else {
+          option.series[0].data[0].value = 40;
+          option.series[1].data[0].value = 60;
+          j = 0;
+        }
+        myChart.setOption(option);
+      }, this.animateTime);
+    },
+    //  popUpIndex() {
+    //    alert("事件响应")
+    //  },
+    popUpIndex1() {
+      (this.populationManage1 = true), (this.isActive = true);
+    },
+    closeDislog1() {
+      (this.populationManage1 = false), (this.isActive = false);
+    },
+
+    popUpIndex2() {
+      (this.specialCrowd2 = true), (this.isActive = true);
+    },
+    closeDislog2() {
+      (this.specialCrowd2 = false), (this.isActive = false);
+    },
+    popUpIndex3() {
+      (this.caseManage3 = true), (this.isActive = true);
+    },
+    closeDislog3() {
+      (this.caseManage3 = false), (this.isActive = false);
+    },
+    popUpIndex4() {
+      (this.keyEnterprise4 = true), (this.isActive = true);
+    },
+    closeDislog4() {
+      (this.keyEnterprise4 = false), (this.isActive = false);
+    },
+
+    popUpIndex5() {
+      (this.railwayProtect5 = true), (this.isActive = true);
+    },
+    closeDislog5() {
+      (this.railwayProtect5 = false), (this.isActive = false);
+    },
+    popUpIndex6() {
+      (this.wifiSniffing6 = true), (this.isActive = true);
+    },
+    closeDislog6() {
+      (this.wifiSniffing6 = false), (this.isActive = false);
+    },
+
     // ============================特殊人群==============================
     //特殊人群事件统计
     specialProblemStatistics() {
@@ -1515,10 +1856,11 @@ export default {
           }
         },
         grid: {
-          top: "25%",
-          left: "4%",
+          top: 40,
+          left: 5,
           right: "2%",
-          bottom: "12%"
+          bottom: -15,
+          containLabel: true
         },
         legend: {
           show: false,
@@ -1536,7 +1878,11 @@ export default {
         xAxis: {
           type: "category",
           axisLabel: {
-            color: "#9b9b9b"
+            color: "#9b9b9b",
+            align: "center",
+            fontSize: 8,
+            margin: 15,
+            rotate: 40
           },
           splitLine: {
             show: false,
@@ -1545,9 +1891,9 @@ export default {
             }
           },
           axisTick: {
-            alignWithLabel: true,
+            // alignWithLabel: true,
             inside: true,
-            length: 260,
+            length: 90,
             lineStyle: {
               color: "rgba(19, 92, 143,0.5)"
             }
@@ -1563,7 +1909,9 @@ export default {
         yAxis: {
           type: "value",
           axisLabel: {
-            color: "#9b9b9b"
+            margin: 10,
+            color: "#9b9b9b",
+            fontSize: 8
           },
           splitLine: {
             show: false,
@@ -1572,8 +1920,10 @@ export default {
             }
           },
           axisTick: {
-            show: false
-            // alignWithLabel:true,
+            lineStyle: {
+              color: "#315265",
+              fontSize: 12
+            }
           },
           axisLine: {
             show: false,
@@ -1589,13 +1939,13 @@ export default {
             type: "line",
             markPoint: {
               // symbol: "roundRect",
-              symbolSize: [10, 10],
+              symbolSize: [5, 5],
               label: {
-                fontSize: 14,
+                fontSize: 8,
                 width: "5px",
-                padding: [3, 15],
-                borderRadius: 100,
-                offset: [5, 6],
+                padding: [2, 2],
+                borderRadius: 50,
+                offset: [3, -2],
                 backgroundColor: "#5475c6"
               },
               data: (function() {
@@ -1616,12 +1966,39 @@ export default {
         ]
       };
       myChart.setOption(option);
+      setInterval(function() {
+        if (!myChart) {
+          return;
+        }
+        let arr1 = [];
+        for (var i = 0; i < 12; i++) {
+          arr1.push(Math.round(Math.random() * 100 + 1));
+        }
+        let arr2 = [];
+        for (var i = 0; i < 12; i++) {
+          arr2.push(Math.round(Math.random() * 100 + 1));
+        }
+        datas = arr1;
+        datas2 = arr2;
+
+        option.series[0].data = arr1;
+        option.series[0].markPoint.data = (function() {
+          let arr = [];
+          datas.forEach((e, i) => {
+            arr.push({ value: e, xAxis: i, yAxis: e });
+          });
+          return arr;
+        })();
+        option.series[1].data = arr2;
+        myChart.setOption(option);
+      }, this.animateTime);
     },
 
     // 户籍人口统计
     specialCrowd() {
       let myChart = echarts.init(document.getElementById("special-crowd"));
       let datas = this.content.cvsSpecialCrowd.data;
+      let datas2 = this.content.cvsSpecialCrowd2.data;
       let color = this.content.cvsSpecialCrowd.color;
       let option = {
         tooltip: {
@@ -1635,18 +2012,18 @@ export default {
         },
         grid: {
           top: "20%",
-          left: "10%",
+          left: "15%",
           right: "4%",
           bottom: "15%"
         },
         xAxis: {
           axisLabel: {
             color: "#9b9b9b",
-            fontSize: 22
+            fontSize: 8
           },
           axisTick: {
             lineStyle: {
-              width: 2,
+              width: 1,
               color: "#9b9b9b"
             }
           },
@@ -1658,7 +2035,7 @@ export default {
           },
           axisLine: {
             lineStyle: {
-              width: 2,
+              width: 1,
               color: "#9b9b9b"
             }
           },
@@ -1669,17 +2046,17 @@ export default {
           type: "category",
           axisLabel: {
             color: "#9b9b9b",
-            fontSize: 18
+            fontSize: 8
           },
           axisTick: {
             lineStyle: {
-              width: 2,
+              width: 1,
               color: "#9b9b9b"
             }
           },
           axisLine: {
             lineStyle: {
-              width: 2,
+              width: 1,
               color: "#9b9b9b"
             }
           },
@@ -1695,6 +2072,7 @@ export default {
         series: [
           {
             type: "bar",
+            barWidth: 8,
             data: (function() {
               let arr = [];
               datas.forEach((e, i) => {
@@ -1713,6 +2091,46 @@ export default {
         ]
       };
       myChart.setOption(option);
+      let j = 0;
+      setInterval(function() {
+        if (!myChart) {
+          return;
+        }
+        j = j + 1;
+        if (j == 1) {
+          option.series[0].data = (function() {
+            let arr = [];
+            datas.forEach((e, i) => {
+              let data = {
+                name: e.name,
+                value: e.value,
+                itemStyle: {
+                  color: color[i]
+                }
+              };
+              arr.push(data);
+            });
+            return arr;
+          })();
+        } else {
+          option.series[0].data = (function() {
+            let arr = [];
+            datas2.forEach((e, i) => {
+              let data = {
+                name: e.name,
+                value: e.value,
+                itemStyle: {
+                  color: color[i]
+                }
+              };
+              arr.push(data);
+            });
+            return arr;
+          })();
+          j = 0;
+        }
+        myChart.setOption(option);
+      }, this.animateTime);
     },
 
     // 特殊人群统计
@@ -1785,43 +2203,43 @@ export default {
           {
             name: "吸毒人员",
             category: "吸毒人员",
-            symbolSize: 20,
+            symbolSize: 15,
             draggable: "true"
           },
           {
             name: "信访人员",
             category: "信访人员",
-            symbolSize: 20,
+            symbolSize: 15,
             draggable: "true"
           },
           {
             name: "维稳人员",
             category: "维稳人员",
-            symbolSize: 20,
+            symbolSize: 15,
             draggable: "true"
           },
           {
             name: "精神病人",
             category: "精神病人",
-            symbolSize: 20,
+            symbolSize: 15,
             draggable: "true"
           },
           {
             name: "失踪人员",
             category: "失踪人员",
-            symbolSize: 20,
+            symbolSize: 15,
             draggable: "true"
           },
           {
             name: "敏感人员",
             category: "敏感人员",
-            symbolSize: 20,
+            symbolSize: 15,
             draggable: "true"
           },
           {
             name: "社区服刑",
             category: "社区服刑",
-            symbolSize: 20,
+            symbolSize: 15,
             draggable: "true"
           }
         ],
@@ -1859,12 +2277,13 @@ export default {
 
       // webkitDep.nodes
       let setData = function() {
-        for (let i = 0; i < 300; i++) {
+        for (let i = 0; i < 100; i++) {
           let n1 = Math.floor(Math.random() * 7 + 1);
           let data = {
             name: webkitDep.nodes[n1].name + "第" + i + "个",
             category: webkitDep.nodes[n1].name,
-            draggable: "true"
+            draggable: "true",
+            symbolSize: 8
           };
           webkitDep.nodes.push(data);
 
@@ -1906,23 +2325,30 @@ export default {
           "#303f60"
         ],
         tooltip: {
+          backgroundColor: "RGBA(255,255,255,0.8)",
+          textStyle: {
+            color: "#333"
+          },
           formatter: function(e) {
             return e.data.name;
           }
         },
         legend: {
-          show: false,
+          // show: false,
           selectedMode: false,
-          top: 80,
-          left: 35,
+          top: 25,
+          left: 10,
           textStyle: {
-            color: "#9b9b9b",
-            fontSize: 14
+            color: "#fff",
+            fontSize: 10
           },
-          itemGap: 34,
+          itemGap: 10,
           itemWidth: 10,
           itemHeight: 10,
           data: legend
+        },
+        grid: {
+          top: "30%"
         },
         animation: false,
         series: [
@@ -1936,7 +2362,7 @@ export default {
               }
             },
             force: {
-              repulsion: 80
+              repulsion: 20
             },
             data: webkitDep.nodes.map(function(node, idx) {
               node.id = idx;
@@ -1971,27 +2397,32 @@ export default {
           }
         },
         grid: {
-          top: "20%",
-          left: "3%",
+          top: "25%",
+          left: "5%",
           right: "3%",
-          bottom: "12%"
+          bottom: "25%"
         },
         xAxis: {
           type: "category",
           boundaryGap: false,
           axisLabel: {
-            color: "#5e7383"
+            color: "#9b9b9b",
+            fontSize: 8,
+            align: "center",
+            margin: 20,
+            rotate: 25
           },
           splitLine: {
             show: false,
             lineStyle: {
-              color: ["#5e7383"]
+              color: ["rgba(49, 82, 101, 0.3)"],
+              fontSize: 8
             }
           },
 
           axisLine: {
             lineStyle: {
-              color: "#5e7383"
+              color: "rgba(49, 82, 101, 0.3)"
             }
           },
           data: this.content.cvsMSaseStatistics.xAxis()
@@ -1999,16 +2430,17 @@ export default {
         yAxis: {
           type: "value",
           axisLabel: {
-            color: "#5e7383"
+            color: "#9b9b9b",
+            fontSize: 8
           },
           splitLine: {
             lineStyle: {
-              color: ["#5e7383"]
+              color: ["rgba(49, 82, 101, 0.3)"]
             }
           },
           axisLine: {
             lineStyle: {
-              color: "#5e7383"
+              color: "rgba(49, 82, 101, 0.3)"
             }
           }
         },
@@ -2036,15 +2468,39 @@ export default {
         ]
       };
       myChart.setOption(option);
+      let j = 0;
+      setInterval(function() {
+        if (!myChart) {
+          return;
+        }
+        j = j + 1;
+        if (j == 1) {
+          let arr = [];
+          for (var i = 0; i < 12; i++) {
+            arr.push(Math.round(Math.random() * 100 + 1));
+          }
+          option.series[0].data = arr;
+        } else {
+          let arr = [];
+          for (var i = 0; i < 12; i++) {
+            arr.push(Math.round(Math.random() * 100 + 1));
+          }
+          option.series[0].data = arr;
+          j = 0;
+        }
+        myChart.setOption(option);
+      }, this.animateTime);
     },
     typeStatistics() {
       let myChart = echarts.init(document.getElementById("type-statistics"));
       let cvsTypeStatistics = this.content.cvsTypeStatistics;
+      let cvsTypeStatistics2 = this.content.cvsTypeStatistics2;
       let indicator = cvsTypeStatistics.indicator;
       let option = {
         tooltip: {
           trigger: "axis",
           backgroundColor: "RGBA(255,255,255,0.8)",
+          position: ["60%", "-30%"],
           formatter: matter => {
             var html = "";
             matter.value.forEach((e, i) => {
@@ -2061,9 +2517,9 @@ export default {
           {
             indicator: indicator,
             splitNumber: 1,
-            nameGap: 30,
+            nameGap: 10,
             name: {
-              fontSize: 18
+              fontSize: 11
             },
             axisLine: {
               show: false,
@@ -2102,7 +2558,7 @@ export default {
             splitArea: {
               show: false
             },
-            radius: "60%"
+            radius: "50%"
           }
         ],
         series: [
@@ -2138,60 +2594,20 @@ export default {
         ]
       };
       myChart.setOption(option);
-    },
-    // ============================大地图==============================
-    initMap() {
-      let map = new BMap.Map("mainMap"); // 创建Map实例
-      map.centerAndZoom(new BMap.Point(121.332778, 30.750986), 15); // 初始化地图,设置中心点坐标和地图级别
-      //添加地图类型控件
-      map.addControl(
-        new BMap.MapTypeControl({
-          mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]
-        })
-      );
-
-      map.setMapStyle({ style: "midnight" });
-      map.setCurrentCity("上海"); // 设置地图显示的城市 此项是必须设置的
-      map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
-      let myIcon = new BMap.Icon(
-        SEVERURL + "/xlgc/icon/p_icon.png",
-        new BMap.Size(100, 100)
-      );
-      let infoBox = new BMapLib.InfoBox(
-        map,
-        '<div class="point-bg"><img src="' +
-          SEVERURL +
-          '/xlgc/icon/img.png" ><p>巡查人：李四</p><p>时间：2017-03-05 14:23:12</p> <p>巡查情况：路面完整，没有异常</p></div>',
-        {
-          boxStyle: {
-            width: "700px",
-            height: "830px",
-            padding: "10px",
-            marginLeft: "240px",
-            paddingBottom: "140px",
-            pointerEvents: "none"
-          },
-          closeIconMargin: "0",
-          enableAutoPan: false,
-          align: INFOBOX_AT_TOP
+      let j = 0;
+      setInterval(function() {
+        if (!myChart) {
+          return;
         }
-      );
-
-      for (let i = 0; i < this.content.Mpoints.length; i++) {
-        let arr = this.content.Mpoints[i];
-        let point = new BMap.Point(arr[0], arr[1]);
-        let marker = new BMap.Marker(point, { icon: myIcon });
-
-        marker.addEventListener("click", function() {
-          infoBox.open(marker);
-          // infoBox.setContent('<div class="point-bg">564564685</div>');
-        });
-        map.addOverlay(marker); // 将标注添加到地图中
-      }
-    },
-
-    clickBtn(index) {
-      this.content.MindexMenu = index;
+        j = j + 1;
+        if (j == 1) {
+          option.series[0].data[0].value = cvsTypeStatistics2.data;
+        } else {
+          option.series[0].data[0].value = cvsTypeStatistics.data;
+          j = 0;
+        }
+        myChart.setOption(option);
+      }, this.animateTime);
     },
 
     // ============================重点企业==============================
@@ -2208,8 +2624,8 @@ export default {
                 formatter: " {d}%",
                 textStyle: {
                   color: "#0dcba7",
-                  padding: [60, 10, 10, 10],
-                  fontSize: 50
+                  padding: [28, 10, 10, 10],
+                  fontSize: 16
                 }
               }
             },
@@ -2221,7 +2637,7 @@ export default {
           },
           {
             silent: true,
-            animation: false,
+
             value: 1 - value,
             label: {
               normal: {
@@ -2243,6 +2659,7 @@ export default {
           {
             type: "pie",
             name: "",
+            animation: false,
             radius: ["30%", "39%"],
             center: ["25%", "25%"],
             data: getData("#20aab4", 0.3),
@@ -2252,6 +2669,7 @@ export default {
           {
             type: "pie",
             name: "",
+            animation: false,
             radius: ["30%", "39%"],
             center: ["73%", "25%"],
             data: getData("#73bf7e", 0.24),
@@ -2261,8 +2679,9 @@ export default {
           {
             type: "pie",
             name: "",
+            animation: false,
             radius: ["30%", "39%"],
-            center: ["25%", "70%"],
+            center: ["25%", "65%"],
             data: getData("#f35e60", 0.5),
             animationEasingUpdate: "cubicInOut",
             animationDurationUpdate: 500
@@ -2270,8 +2689,9 @@ export default {
           {
             type: "pie",
             name: "",
+            animation: false,
             radius: ["30%", "39%"],
-            center: ["73%", "70%"],
+            center: ["73%", "65%"],
             data: getData("#5189f8", 0.8),
             animationEasingUpdate: "cubicInOut",
             animationDurationUpdate: 500
@@ -2279,6 +2699,20 @@ export default {
         ]
       };
       myChart.setOption(option);
+      setInterval(function() {
+        if (!myChart) {
+          return;
+        }
+        let rate1 = Math.random();
+        let rate2 = Math.random();
+        let rate3 = Math.random();
+        let rate4 = Math.random();
+        option.series[0].data = getData("#20aab4", rate1);
+        option.series[1].data = getData("#73bf7e", rate2);
+        option.series[2].data = getData("#f35e60", rate3);
+        option.series[3].data = getData("#5189f8", rate4);
+        myChart.setOption(option);
+      }, this.animateTime);
     },
     contrast() {
       let myChart = echarts.init(document.getElementById("contrast"));
@@ -2305,15 +2739,21 @@ export default {
           }
         },
         grid: {
-          left: "3%",
+          top: 35,
+          left: 30,
           right: "3%",
-          bottom: "3%",
-          containLabel: true
+          bottom: 35
         },
         xAxis: [
           {
             type: "category",
             boundaryGap: false,
+            axisLabel: {
+              margin: 10,
+              align: "center",
+              fontSize: 9,
+              rotate: 35
+            },
             axisTick: {
               show: false
             },
@@ -2330,18 +2770,18 @@ export default {
               }
             },
             data: [
-              "1月",
-              "2月",
-              "3月",
-              "4月",
-              "5月",
-              "6月",
-              "7月",
-              "8月",
-              "9月",
-              "10月",
-              "11月",
-              "12月"
+              "17.01",
+              "17.02",
+              "17.03",
+              "17.04",
+              "17.05",
+              "17.06",
+              "17.07",
+              "17.08",
+              "17.09",
+              "17.10",
+              "17.11",
+              "17.12"
             ]
           }
         ],
@@ -2358,10 +2798,7 @@ export default {
               }
             },
             axisLabel: {
-              margin: 10,
-              textStyle: {
-                fontSize: 14
-              }
+              fontSize: 9
             },
             splitLine: {
               lineStyle: {
@@ -2378,7 +2815,7 @@ export default {
             showSymbol: false,
             lineStyle: {
               normal: {
-                width: 5
+                width: 3
               }
             },
             data: [
@@ -2403,7 +2840,7 @@ export default {
             showSymbol: false,
             lineStyle: {
               normal: {
-                width: 5
+                width: 3
               }
             },
             data: [
@@ -2424,12 +2861,28 @@ export default {
         ]
       };
       myChart.setOption(option);
+      /*setInterval(function(){
+        if(!myChart){
+          return;
+        }
+        let arr = [];
+        for (var i = 0; i < 12; i++) {
+            arr[i] = Math.round(Math.random()*100+1);
+        }
+        
+        
+        option.series[0].data = ;
+        option.series[1].data = getData("#73bf7e", rate2);
+        option.series[2].data = getData("#f35e60", rate3);
+        option.series[3].data = getData("#5189f8", rate4);
+        myChart.setOption(option);
+      },this.animateTime);*/
     },
 
     // ============================铁路护路==============================
     rMap() {
       let map = new BMap.Map("r-map-st"); // 创建Map实例
-      map.centerAndZoom(new BMap.Point(121.321763, 30.721421), 17); // 初始化地图,设置中心点坐标和地图级别
+      map.centerAndZoom(new BMap.Point(121.321763, 30.721421), 15); // 初始化地图,设置中心点坐标和地图级别
       //添加地图类型控件
       map.addControl(
         new BMap.MapTypeControl({
@@ -2446,7 +2899,7 @@ export default {
         strokeColor: "#fff", //设置矢量图标的线填充颜色
         strokeWeight: "2" //设置线宽
       });
-      this.content.Rpoints.forEach(e => {
+      this.content.RpointsLine.forEach(e => {
         var icons = new BMap.IconSequence(sy, "10", "30");
         // 创建polyline对象
         var pois = e.p;
@@ -2490,9 +2943,9 @@ export default {
         },
         grid: {
           top: "25%",
-          left: "4%",
-          right: "3%",
-          bottom: "15%"
+          left: 40,
+          right: "4%",
+          bottom: "25%"
         },
         legend: {
           show: false,
@@ -2500,7 +2953,7 @@ export default {
           right: 35,
           textStyle: {
             color: "#9b9b9b",
-            fontSize: 14
+            fontSize: 12
           },
           itemGap: 34,
           itemWidth: 10,
@@ -2511,8 +2964,11 @@ export default {
           type: "category",
           boundaryGap: false,
           axisLabel: {
-            margin: 15,
-            color: "#c5cbce"
+            margin: 20,
+            rotate: 20,
+            color: "#c5cbce",
+            align: "center",
+            fontSize: 8
           },
           splitLine: {
             lineStyle: {
@@ -2536,8 +2992,8 @@ export default {
         yAxis: {
           type: "value",
           axisLabel: {
-            margin: 20,
-            color: "#c5cbce"
+            color: "#c5cbce",
+            fontSize: 10
           },
           splitLine: {
             lineStyle: {
@@ -2556,18 +3012,20 @@ export default {
         },
         series: [
           {
-            name: "上月",
+            name: "本月",
             data: datas,
-            symbolSize: 13,
+            symbolSize: 8,
             areaStyle: { normal: {} },
-            type: "line"
+            type: "line",
+            z: 3
           },
           {
-            name: "本月",
+            name: "上月",
             data: datas2,
-            symbolSize: 13,
+            symbolSize: 8,
             areaStyle: { normal: {} },
-            type: "line"
+            type: "line",
+            z: 2
           }
         ]
       };
@@ -2624,63 +3082,63 @@ export default {
             name: "下横径桥",
             value: 10,
             draggable: "true",
-            symbolSize: 10
+            symbolSize: 5
           },
           {
             category: "金山卫镇",
             name: "金山卫镇",
             value: 53.28,
             draggable: "true",
-            symbolSize: 53.28
+            symbolSize: 15
           },
           {
             category: "顾家滨桥",
             name: "顾家滨桥",
             value: 43.39,
             draggable: "true",
-            symbolSize: 43.39
+            symbolSize: 14
           },
           {
             category: "高桥村",
             name: "高桥村",
             value: 39.18,
             draggable: "true",
-            symbolSize: 39.18
+            symbolSize: 13
           },
           {
             category: "蒋庄村",
             name: "蒋庄村",
             value: 38.7,
             draggable: "true",
-            symbolSize: 38.7
+            symbolSize: 13.7
           },
           {
             category: "山阳镇",
             name: "山阳镇",
             value: 38.52,
             draggable: "true",
-            symbolSize: 38.52
+            symbolSize: 13.5
           },
           {
             category: "德胜村",
             name: "德胜村",
             value: 38.3,
             draggable: "true",
-            symbolSize: 38.3
+            symbolSize: 13.3
           },
           {
             category: "联建村",
             name: "联建村",
             value: 36.4,
             draggable: "true",
-            symbolSize: 36.4
+            symbolSize: 13.6
           },
           {
             category: "玉兰新村",
             name: "玉兰新村",
             value: 35.03,
             draggable: "true",
-            symbolSize: 35.03
+            symbolSize: 13
           }
         ],
 
@@ -2765,9 +3223,10 @@ export default {
             type: "graph",
             layout: "force",
             force: {
-              repulsion: 600,
+              repulsion: 100,
               gravity: 0.3
             },
+            zoom: true,
             data: _data.data,
             categories: _data.categories,
             itemStyle: {
@@ -2781,7 +3240,7 @@ export default {
               normal: {
                 show: true,
                 position: "top",
-                fontSize: 16
+                fontSize: 12
               }
             },
             lineStyle: {
@@ -2796,57 +3255,83 @@ export default {
       };
       myChart.setOption(option);
     }
+  },
+  components: {
+    cptMap,
+    specialCrowd,
+    populationManage,
+    caseManage,
+    keyEnterprise,
+    railwayProtect,
+    wifiSniffing
   }
 };
 </script>
 <style scoped lang="less">
+.bgColor2 {
+  position: fixed !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1001;
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
 .header {
   position: relative;
   .move {
     cursor: pointer;
     padding-top: 5px;
-    width: 100px;
+    width: 50px;
     height: 50px;
     color: #026e75;
     font-size: 28px;
     position: absolute;
-    right: 50px;
-    top: 30px;
+    right: 5px;
+    bottom: 0px;
     margin: auto;
     i {
       font-weight: bold;
-      transform: translateY(4px);
+      transform: translateY(0px);
+      font-size: 14px;
     }
     span {
-      font-size: 18px;
+      font-size: 12px;
     }
   }
 }
 
 .index {
-  width: 1920px;
-  height: 1080px;
+  #total-population {
+    float: left;
+    overflow: hidden;
+  }
+  #household-registration {
+    float: left;
+  }
+
+  height: 335px;
   .header {
-    background: url(../assets/images/title1.png) no-repeat center center;
+    background: url(../assets/images/title1.png) no-repeat center;
+    background-size: auto 30px;
   }
 
   .box {
-    padding: 10px;
   }
 
   .display {
     background: url(../assets/images/cvs1.png) no-repeat;
+    background-size: 100% 100%;
   }
 
   .display2 {
     background: url(../assets/images/cvs2.png) no-repeat;
+    background-size: 100% 100%;
   }
 
   .display,
   .display2 {
     /*background-color: #08304a;*/
-    margin: 10px;
-    padding: 10px;
+    margin: 2.5px;
     position: relative;
   }
 
@@ -2858,10 +3343,9 @@ export default {
     top: 0px;
     bottom: 0px;
     margin: auto;
-    height: 200px;
-    font-size: 16px;
-    padding-left: 10px;
-    padding-top: 30px;
+    font-size: 12px;
+
+    padding-top: 10px;
   }
 
   .display2 .m-f-p .male {
@@ -2937,51 +3421,43 @@ export default {
     width: 100%;
   }
 
-  .display .title,
-  .display2 .title {
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    color: #0dcba7;
-    z-index: 10;
-    font-size: 24px;
-    padding: 0px 40px;
-  }
-
   .display {
-    height: 560px;
+    height: 180px;
   }
 
   .display2 {
-    height: 340px;
+    height: 115px;
   }
 }
 
 .specialcrowd {
-  width: 1920px;
-  height: 1080px;
+  height: 365px;
   .header {
-    background: url(../assets/images/title2.png) no-repeat center center;
+    background: url(../assets/images/title2.png) no-repeat center -5px;
+    background-size: auto 30px;
   }
 
   .box {
-    margin: 20px;
+    padding: 0px 5px;
   }
 
   .special-p-s {
     background: url(../assets/images/cvs1172x400.png) no-repeat;
-    height: 400px;
-    margin-bottom: 20px;
+    background-size: 100% 100%;
+    height: 160px;
+    margin-bottom: 5px;
   }
 
   .special-crowd {
-    height: 500px;
+    height: 170px;
     background: url(../assets/images/cvs1172x500.png) no-repeat;
+    background-size: 100% 100%;
   }
 
   .special-trend {
-    height: 920px;
+    height: 335px;
     background: url(../assets/images/cvs683x920.png) no-repeat;
+    background-size: 100% 100%;
   }
 
   .display {
@@ -2989,18 +3465,17 @@ export default {
   }
 
   .display .charts-legend {
-    height: 80px;
+    height: 17px;
     width: 100%;
     position: absolute;
-    top: 10px;
-    right: 30px;
+    top: 5px;
+    right: 5px;
     z-index: 10;
   }
 
   .display .charts-legend .legend {
-    width: 50px;
-    margin-top: 10px;
-    margin-left: 25px;
+    width: 45px;
+    margin-left: 0px;
   }
 
   .display .charts-legend .legend .symbol {
@@ -3014,14 +3489,14 @@ export default {
 }
 
 .managementCase {
-  width: 1920px;
-  height: 1080px;
+  height: 340px;
   .header {
-    background: url(../assets/images/title3.png) no-repeat center center;
+    background: url(../assets/images/title3.png) no-repeat center -3px;
+    background-size: auto 30px;
   }
 
   .box {
-    margin: 20px;
+    padding: 0px 5px;
   }
 
   .table-b {
@@ -3036,17 +3511,16 @@ export default {
 
   .display {
     position: relative;
-    height: 450px;
-    /*background: url(../assets/images/cvs3.png) no-repeat;*/
+    height: 153px;
   }
 
   strong {
-    font-size: 16px;
+    font-size: 13px;
   }
 
   #case-statistics {
     background: url(../assets/images/1875x450.png) no-repeat !important;
-    background-size: 100% 100%;
+    background-size: 100% 100% !important;
   }
 
   .radar-b {
@@ -3058,244 +3532,14 @@ export default {
     margin: auto;
     width: 100%;
     height: 100%;
-    background: url(../assets/images/radar.png) no-repeat center 27px;
-    background-size: 455px 450px;
-  }
-}
-
-.mainMap {
-  &,
-  .box {
-    width: 3840px;
-    height: 2160px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .header {
-    width: 3840px;
-    height: 522px;
-    background: url(../assets/images/mainHead.png) no-repeat center center;
-    background-size: auto 100%;
-    position: relative;
-    z-index: 3;
-  }
-
-  .box {
-    position: absolute;
-    top: 450px;
-    left: 0px;
-    width: 100%;
-    height: 1710px;
-    overflow: hidden;
-  }
-
-  .ry-mg {
-    background: url(../assets/images/ry_mg.png) no-repeat;
-    background-size: auto 100%;
-  }
-
-  .ry-mg:hover,
-  .ry-mg_act {
-    background: url(../assets/images/ry_mg_act.png) no-repeat;
-    background-size: auto 100%;
-  }
-
-  .s_c {
-    background: url(../assets/images/s_c.png) no-repeat;
-    background-size: auto 100%;
-    transition: all 0.3s;
-  }
-
-  .s_c:hover,
-  .s_c_act {
-    background: url(../assets/images/s_c_act.png) no-repeat;
-    background-size: auto 100%;
-  }
-
-  .case_mg {
-    background: url(../assets/images/case_mg.png) no-repeat;
-    background-size: auto 100%;
-  }
-
-  .case_mg:hover,
-  .case_mg_act {
-    background: url(../assets/images/case_mg_act.png) no-repeat;
-    background-size: auto 100%;
-  }
-
-  .lj_wf {
-    background: url(../assets/images/lj_wf.png) no-repeat;
-    background-size: auto 100%;
-  }
-
-  .lj_wf:hover,
-  .lj_wf_act {
-    background: url(../assets/images/lj_wf_act.png) no-repeat;
-    background-size: auto 100%;
-  }
-
-  .key_enterp {
-    background: url(../assets/images/key_enterp.png) no-repeat;
-    background-size: auto 100%;
-  }
-
-  .key_enterp:hover,
-  .key_enterp_act {
-    background: url(../assets/images/key_enterp_act.png) no-repeat;
-    background-size: auto 100%;
-  }
-
-  .r_pt {
-    background: url(../assets/images/r_pt.png) no-repeat;
-    background-size: auto 100%;
-  }
-
-  .r_pt:hover,
-  .r_pt_act {
-    background: url(../assets/images/r_pt_act.png) no-repeat;
-    background-size: auto 100%;
-  }
-
-  .max_video {
-    background: url(../assets/images/max_video.png) no-repeat;
-    background-size: auto 100%;
-  }
-
-  .max_video:hover,
-  .max_video_act {
-    background: url(../assets/images/max_video_act.png) no-repeat;
-    background-size: auto 100%;
-  }
-
-  .map-mask {
-    top: 450px;
-    height: 2160px;
-    background: url("../assets/images/mapMask2.png");
-    position: absolute;
-    left: 0px;
-    right: 0px;
-    margin: auto;
-    z-index: 99;
-    pointer-events: none;
-  }
-
-  .explain-b,
-  .explain-b2 {
-    position: absolute;
-    left: 100px;
-    width: 700px;
-    padding-top: 95px;
-    padding-bottom: 195px;
-    z-index: 4;
-    background-size: 100%;
-    z-index: 1000;
-  }
-
-  .explain-b2 {
-    width: 600px;
-  }
-
-  .ex-title {
-    position: absolute;
-    top: -60px;
-    width: 360px;
-    left: 35px;
-    font-size: 36px;
-    padding: 0px 70px;
-    z-index: 20;
-    padding-top: 5px;
-    color: #0dcca5;
-    text-align: center;
-    padding: 0px 40px;
-    font-weight: bold;
-  }
-
-  .ex-title::before {
-    position: absolute;
-    content: "";
-    height: 50px;
-    width: 50px;
-    left: 15px;
-    top: 0px;
-    background: url(../assets/images/title-left.png) no-repeat center center;
-    background-size: 65% auto;
-  }
-
-  .ex-title::after {
-    position: absolute;
-    content: "";
-    height: 50px;
-    width: 50px;
-    right: 15px;
-    top: 0px;
-    background: url(../assets/images/title-right.png) no-repeat center center;
-    background-size: 65% auto;
-  }
-
-  .explain-b:before {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100px;
-    background: #fff;
-    content: "";
-    z-index: 2;
-    background: url(../assets/images/explain_bg_hd2.png) no-repeat;
-    background-size: 100% auto;
-  }
-
-  .explain-b:after {
-    position: absolute;
-    bottom: 130px;
-    left: 0px;
-    width: 100%;
-    height: 195px;
-    background: #fff;
-    content: "";
-    z-index: 5;
-    background: url(../assets/images/explain_bg_ft2.png) no-repeat;
-    background-size: 100% auto;
-  }
-
-  .ex-content {
-    background: url(../assets/images/explain_bg2.png) no-repeat;
-    background-size: 100% auto;
-    font-size: 24px;
-    position: relative;
-    font-size: 30px;
-    padding: 10px 30px;
-    z-index: 3;
-  }
-
-  .m-too {
-    height: 150px;
-    width: 100%;
-    position: absolute;
-    bottom: 30px;
-    cursor: pointer;
-    z-index: 1000;
-  }
-
-  .m-too .btn {
-    height: 100px;
-    width: 350px;
-    display: inline-block;
-    margin: 0px 85px;
-    transition: all 0.3s;
-  }
-
-  ul li {
-    height: 76px;
-    font-size: 34px;
+    background: url(../assets/images/radar.png) no-repeat 31px 17px;
+    background-size: 135px 135px;
   }
 }
 
 .video {
   &,
   .box {
-    width: 3840px;
     height: 1070px;
     position: relative;
     overflow: hidden;
@@ -3305,62 +3549,53 @@ export default {
   .explain-b2 {
     position: absolute;
     left: 30px;
-    top: 30px;
-    width: 400px;
-    padding-top: 54px;
-    padding-bottom: 195px;
+    top: 15px;
+    width: 222px;
+    padding-top: 37px;
     z-index: 4;
     background-size: 100%;
     z-index: 1000;
   }
 
-  .explain-b2 {
-    width: 600px;
-  }
-
   .ex-title {
     position: absolute;
-    top: -44px;
-    width: 200px;
-    left: 20px;
-    font-size: 24px;
-    padding: 0px 50px;
+    top: -18px;
+    width: 130px;
+    left: 0px;
+    font-size: 12px;
+    padding: 0px 32px;
     z-index: 20;
-    padding-top: 5px;
     color: #0dcca5;
     text-align: center;
-    padding: 7px 40px;
     font-weight: bold;
   }
 
   .ex-title::before {
     position: absolute;
     content: "";
-    height: 50px;
-    width: 50px;
+    height: 10px;
+    width: 47px;
     left: 0px;
-    top: 0px;
+    top: 6px;
     background: url(../assets/images/title-left.png) no-repeat center center;
-    background-size: 50% auto;
   }
 
   .ex-title::after {
     position: absolute;
     content: "";
-    height: 50px;
-    width: 50px;
+    height: 10px;
+    width: 40px;
     right: 0px;
-    top: 0px;
+    top: 6px;
     background: url(../assets/images/title-right.png) no-repeat center center;
-    background-size: 50% auto;
   }
 
   .explain-b:before {
     position: absolute;
-    top: 0px;
+    top: 7px;
     left: 0px;
     width: 100%;
-    height: 55px;
+    height: 38px;
     background: #fff;
     content: "";
     z-index: 2;
@@ -3370,10 +3605,10 @@ export default {
 
   .explain-b:after {
     position: absolute;
-    bottom: 173px;
+    bottom: -20px;
     left: 0px;
     width: 100%;
-    height: 98px;
+    height: 70px;
     background: #fff;
     content: "";
     z-index: 5;
@@ -3386,47 +3621,55 @@ export default {
     background-size: 100% 100%;
     font-size: 24px;
     position: relative;
-    font-size: 15px;
-    padding: 10px 30px;
+    font-size: 12px;
+    padding: 10px 20px;
     z-index: 3;
   }
 
   ul li {
     height: 38 px;
-    font-size: 18px;
+    font-size: 14px;
     text-align: left;
     color: #20aab4;
   }
 
   .m-v {
     height: 1070px;
-    width: 1920px;
   }
 }
 
 .keyEnterprises {
   .header {
     background: url(../assets/images/title4.png) no-repeat center center;
+    background-size: auto 30px;
   }
 
   #zdwh {
     background: url(../assets/images/627x920.png) no-repeat;
     background-size: 100% 100%;
+
+    .total {
+      font-size: 14px;
+      position: absolute;
+      bottom: 5px;
+      color: #0dcba7;
+      width: 100%;
+    }
   }
 
   .box {
-    margin: 20px;
+    margin: 5px;
     color: #94d5d9;
   }
 
   .display {
     background-size: 100% 100%;
-    height: 920px;
+    height: 300px;
     position: relative;
   }
 
   #inspect {
-    padding-top: 90px;
+    padding-top: 30px;
   }
 
   #inspect-bg {
@@ -3436,11 +3679,10 @@ export default {
 
   .pie-name {
     position: absolute;
-    top: 380px;
-    left: 80px;
-    padding: 8px;
-    font-size: 18px;
-    width: 150px;
+    top: 125px;
+    left: 5px;
+    font-size: 12px;
+    width: 70px;
     background: #0d3d54;
     border: 1px solid #0a445c;
     border-radius: 3px;
@@ -3449,48 +3691,47 @@ export default {
 
   .b-r {
     border-right: 1px solid #0f5167;
-    height: 40px;
-    line-height: 40px;
+    height: 30px;
+    line-height: 30px;
   }
 
   .b-l {
     border-left: 1px solid #0f5167;
-    height: 40px;
-    line-height: 40px;
+    height: 30px;
+    line-height: 30px;
   }
 
   .b-m {
     border-bottom: 1px solid #0f5167;
-    height: 40px;
-    line-height: 40px;
-    font-size: 14px;
+    border-top: 1px solid #0f5167;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
   }
 
   .tb-title {
-    height: 40px;
-    line-height: 40px;
+    height: 30px;
+    line-height: 30px;
     color: #fff;
-    font-size: 16px;
+    font-size: 12px;
   }
 
   #contrast {
-    margin-top: 30px;
-    height: 350px;
+    height: 145px;
   }
 
   .display .charts-legend {
-    height: 80px;
     width: 100%;
     position: absolute;
-    top: 10px;
-    right: 30px;
+    top: 5px;
+    right: 0px;
     z-index: 10;
   }
 
   .display .charts-legend .legend {
     width: 50px;
     margin-top: 10px;
-    margin-left: 25px;
+    margin-left: 10px;
   }
 
   .display .charts-legend .legend .symbol {
@@ -3504,17 +3745,19 @@ export default {
 }
 
 .railwayProtection {
+  height: 370px;
   .header {
     background: url(../assets/images/title5.png) no-repeat center center;
+    background-size: auto 30px;
   }
 
   .box {
-    padding: 20px;
+    padding: 5px;
+    padding-bottom: 0px;
   }
 
   .display {
     position: relative;
-    height: 470px;
     margin-bottom: 0px;
   }
 
@@ -3523,14 +3766,19 @@ export default {
   }
 
   #railway-situation {
+    height: 140px;
     background: url(../assets/images/1875x430.png) no-repeat !important;
+    background-size: 100% 100% !important;
+    margin-bottom: 5px;
   }
 
   .r-map-st {
-    margin: 20px 20px 0px 20px;
+    margin: 0px 5px;
     background: url(../assets/images/976x470.png) no-repeat;
-    padding: 30px;
-    padding-top: 80px;
+    background-size: 100% 100%;
+    padding: 5px;
+    padding-top: 50px;
+    height: 185px;
   }
 
   #r-map-st {
@@ -3540,31 +3788,33 @@ export default {
   #security,
   #ranking {
     margin: 0px;
-    margin-top: 20px;
   }
 
   #security-bg {
+    height: 185px;
     background: url(../assets/images/469x470.png) no-repeat;
+    background-size: 100% 100%;
   }
 
   #ranking {
+    height: 185px;
     text-align: left;
     background: url(../assets/images/391x470.png) no-repeat;
     background-size: 100% 100%;
   }
 
   .display .charts-legend {
-    height: 45px;
+    height: 35px;
     width: 100%;
     position: absolute;
-    top: 25px;
-    right: 30px;
+    top: 0px;
+    right: 0px;
     z-index: 10;
   }
 
   .display .charts-legend .legend {
     margin-top: 10px;
-    margin-left: 25px;
+    margin-left: 10px;
   }
 
   .display .charts-legend .legend .symbol {
@@ -3585,82 +3835,91 @@ export default {
   }
 
   #ranking li {
-    padding: 0px 10px;
-    height: 34px;
+    padding: 1px 5px;
+    font-size: 12px;
     border-bottom: 1px solid #163a52;
   }
 
   #ranking .l-title {
-    padding: 0px 10px;
-    font-size: 16px;
-    height: 40px;
-    line-height: 30px;
+    padding: 0px;
+    font-size: 13px;
+    line-height: 25px;
     background: #0e465d;
     border: none;
   }
 
   .l-r-p {
-    padding: 5px;
+    padding: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   #security {
     background: url(../assets/images/security-bg.gif) no-repeat;
     background-position-x: center;
-    background-position-y: 120px;
-    background-size: 50%;
+    background-position-y: 50px;
+    background-size: 60%;
   }
 
   .nb {
     position: absolute;
-    height: 50px;
+    height: 30px;
+    line-height: 22px;
     width: 100px;
     text-align: center;
-    top: 0px;
+    top: 80px;
     right: 0px;
-    bottom: 0px;
     left: 0px;
     margin: auto;
-    font-size: 55px;
-    font-weight: bold;
+    font-size: 18px;
+    font-weight: bold !important;
     color: #fff;
   }
 }
 
 .wifiFixed {
   .region {
-    padding: 30px;
-    padding-top: 80px;
+    padding: 10px 20px;
+    padding-bottom: 0px;
+  }
+  .box {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    margin: 5px;
+    margin-top: 0px;
+    background: url(../assets/images/1867x886.png) no-repeat;
+    background-size: 100% 100%;
   }
 
   #wifi {
-    padding-top: 50px;
-    height: 400px;
+    height: 160px;
+    width: 100%;
+    position: absolute;
+    top: 0px;
   }
 
   .region .title {
     text-align: left;
-    line-height: 60px;
-    font-size: 34px;
+    font-size: 13px;
     position: relative;
   }
 
   .r-list {
-    padding-top: 30px;
-    height: 90px;
-    margin-bottom: 80px;
+    padding-top: 10px;
+    height: 65px;
   }
 
   .r-list li {
-    width: 200px;
-    height: 55px;
     background: #000;
     float: left;
     border-radius: 5px;
-    margin-left: 30px;
-    font-size: 18px;
+    margin-left: 10px;
+    font-size: 12px;
     position: relative;
     text-align: center;
-    padding: 14px 50px 14px 20px;
+    padding: 5px 40px 5px 10px;
     cursor: pointer;
     transition: all 0.2s;
   }
@@ -3676,9 +3935,9 @@ export default {
 
   .r-list li span {
     position: absolute;
-    top: 15px;
+    top: 5px;
     right: 10px;
-    font-size: 18px;
+    font-size: 13px;
     color: #fff;
     font-weight: bold;
   }
@@ -3688,52 +3947,45 @@ export default {
     display: inline-block;
     border: 1px solid #0e5569;
     border-radius: 3px;
-    height: 60px;
-    line-height: 58px;
+    height: 35px;
     background: #0d3d54;
+    top: -15px;
     color: #1cf2f4;
-    margin-left: 30px;
-    padding: 0px 30px;
-    font-size: 45px;
+    margin-left: 20px;
+    padding: 0px 10px;
+    font-size: 24px;
     font-weight: bold;
   }
 
   .header {
-    background: url(../assets/images/title6.png) no-repeat center center;
-  }
-
-  .box {
-    margin: 20px;
-    background: url(../assets/images/1867x886.png) no-repeat;
-    background-size: 100% 100%;
+    background: url(../assets/images/title6.png) no-repeat center -5px;
+    background-size: auto 30px;
   }
 
   .display {
   }
 
   .progress-r-b {
-    height: 400px;
+    height: 130px;
   }
 
   .progress-r-b .charts {
-    padding: 30px;
-    padding-top: 110px;
+    padding: 35px 0px 0px 20px;
   }
 
   .progress-r {
-    height: 65px;
+    height: 20px;
     background: #0c4056;
     border-left: 3px solid #20aab4;
     position: relative;
-    padding: 10px;
-    padding-left: 120px;
-    margin-right: 200px;
-    margin-bottom: 30px;
+    padding: 5px;
+    padding-left: 70px;
+    margin-right: 80px;
+    margin-bottom: 10px;
   }
 
   .progress-r .progress-v {
-    margin-top: 8px;
-    height: 30px;
+    height: 10px;
     background: #20aab4;
     border-radius: 30px;
     position: relative;
@@ -3744,23 +3996,23 @@ export default {
   .progress-r .progress-b {
     z-index: 1;
     width: 100%;
-    height: 30px;
+    height: 10px;
     border-radius: 30px;
     background: #0e5569;
   }
 
   .progress-r .f-l {
     position: absolute;
-    font-size: 18px;
-    top: 19px;
-    left: 20px;
+    font-size: 14px;
+    top: 0px;
+    left: 4px;
   }
 
   .progress-r .f-r {
     position: absolute;
     white-space: nowrap;
-    font-size: 30px;
-    top: 10px;
+    font-size: 14px;
+    top: 0px;
     left: 102%;
     font-weight: bold;
   }

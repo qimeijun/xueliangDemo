@@ -37,7 +37,7 @@
               <div class="c-case-all-t-l">
                 <div class="c-case-all-head">
                   <div class="c-case-all-title">案件事件统计</div>
-                  <div class="m-foot-head-select">
+                  <div class="m-foot-head-select opt-select">
                     <select class="c-input c-select ">
                       <option>2017.12</option>
                       <option>2017.11</option>
@@ -52,7 +52,7 @@
               <div class="c-case-all-t-c">
                 <div class="c-case-all-head">
                   <div class="c-case-all-title">今日案件统计</div>
-                  <div class="m-foot-head-select">
+                  <div class="m-foot-head-select opt-select">
                     <select class="c-input c-select ">
                       <option>2017.12.31</option>
                     </select>
@@ -339,7 +339,7 @@
                   <option>2017.10</option>
                 </select>
               </div>
-            <div class="m-foot-statics" id="mentalPatientsArea"></div>
+            <div class="m-foot-statics" id="caseManageArea"></div>
         </div>
         </Col>
         <Col span="12">
@@ -347,7 +347,7 @@
             <div class="c-case-all-head">
               <div class="c-case-all-title">{{ staticsTitle.right }}</div>                
             </div>
-            <div class="m-foot-statics" id="mentalPatientsTs"></div>
+            <div class="m-foot-statics" id="caseManageTs"></div>
         </div>
         </Col>
     </Row>
@@ -388,142 +388,13 @@
 </div>
 </template>
 <style scoped lang="less">
-.main {
-  position: absolute;
-  left: 50%;
-  transform: translate(-25%);
-  width: 1265px;
-  height: 963px;
-  font-size: 16px;
-  overflow: hidden;
-  z-index: 1001;
-  background: url(../assets/images/c_bg1.png) no-repeat center center;
-}
-.m-header {
-  margin-top: 50px;
-  height: 45px;
-}
-.m-title {
-  height: 45px;
-  width: 100%;
-  img {
-    width: 60%;
-  }
-}
-.m-close span {
-  display: inline-block;
-  margin-right: 30px;
-  width: 23px;
-  height: 23px;
-  cursor: pointer;
-  background: url(../assets/images/close.png) no-repeat center center;
-}
-.m-content {
-  width: 1245px;
-  height: 600px;
-}
-.m-cmenu {
-  width: 100%;
-  height: 600px;
-  background: url(../assets/images/c_r_bg.png) no-repeat center center;
-  ul {
-    height: 557px;
-    width: 220px;
-    list-style: none;
-    margin-top: 10px;
-    padding: 10px;
-    font-size: 22px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    .c-active {
-      background: url(../assets/images/m_button_2.png) no-repeat center center;
-    }
-    li {
-      width: 158px;
-      height: 42px;
-      margin: 30px 0 30px 40px;
-      line-height: 42px;
-      text-align: center;
-      cursor: pointer;
-      background: url(../assets/images/m_button_1.png) no-repeat center center;
-      i::before {
-        content: "";
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        margin-right: 8px;
-      }
-      .c-cmenu-v1 {
-        background: url(../assets/images/c_icon_v1.png) no-repeat center center;
-      }
-      .c-cmenu-v2 {
-        background: url(../assets/images/c_icon_v2.png) no-repeat center center;
-      }
-      .c-cmenu-v3 {
-        background: url(../assets/images/c_icon_v3.png) no-repeat center center;
-      }
-      .c-cmenu-v4 {
-        background: url(../assets/images/c_icon_v4.png) no-repeat center center;
-      }
-      .c-cmenu-v5 {
-        background: url(../assets/images/c_icon_v5.png) no-repeat center center;
-      }
-      .c-cmenu-v6 {
-        background: url(../assets/images/c_icon_v6.png) no-repeat center center;
-      }
-      .c-cmenu-v7 {
-        background: url(../assets/images/c_icon_v7.png) no-repeat center center;
-      }
-    }
-    li:hover {
-      background: url(../assets/images/m_button_2.png) no-repeat center center;
-    }
-  }
-}
-.m-ccontent {
-  width: 100%;
-  height: 600px;
-  .m-cconditional {
-    margin-top: 30px;
-    text-align: left;
+@import "../assets/style.less";
 
-    .c-button {
-      margin-left: 20px;
-      height: 40px;
-      width: 95px;
-      outline: none;
-      border: none;
-      border-radius: 50px 50px 50px 50px;
-      color: #fbfbfb;
-      line-height: 40px;
-      background-color: #01bbb8;
-    }
-    .c-button:hover {
-      background-color: #21fcf6;
-    }
-    .c-button-search i::before {
-      content: "";
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      vertical-align: middle;
-      background: url(../assets/images/c_search.png) no-repeat center center;
-    }
-    .c-button-fresh i::before {
-      content: "";
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      vertical-align: middle;
-      background: url(../assets/images/c_refresh.png) no-repeat center center;
-    }
-  }
-}
 .c-input {
-  width: 150px;
+  width: 110px;
   height: 40px;
   padding-left: 10px;
-  margin-left: 10px;
+  margin-left: 4px;
   color: #92a1b4;
   background-color: #14375f;
   border: none;
@@ -534,72 +405,30 @@
   border: 1px solid #01bbb8;
 }
 .c-select {
-  width: 150px;
+  width: 120px;
   color: #fbfbfb;
   option {
     -webkit-appearance: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     background-color: #14375f;
+    background-color: #14375f;
     color: #fbfbfb;
-  }
-}
-.m-ctable {
-  margin-top: 20px;
-  .c-table-oper {
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    cursor: pointer;
-    background: url(../assets/images/c_operation.png) no-repeat center center;
-  }
-  .c-table-oper:hover {
-    background: url(../assets/images/c_operation_2.png) no-repeat center center;
-  }
-  .th .ivu-col,
-  .tb .ivu-col {
-    border-left: none;
-  }
-}
-
-.m-page {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #f0f1f3;
-  .c-page-l {
-    text-align: left;
-    input {
-      color: white;
-      width: 50px;
-      background-color: #05283b;
-      border: 1px solid white;
-      outline: none;
-    }
-  }
-  .c-page-r {
-    text-align: right;
   }
 }
 
 .m-foot {
-  width: 98%;
-  height: 260px;
-  margin: 10px auto 0;
-  .m-foot-l {
-    width: 598px;
+  .m-foot-l,
+  .m-foot-r {
+    width: 465px;
     height: 213px;
     margin: auto;
     background: url(../assets/images/c_f_l.png) no-repeat center center;
-  }
-  .m-foot-r {
-    width: 599px;
-    height: 213px;
-    margin: auto;
-    background: url(../assets/images/c_f_r.png) no-repeat center center;
+    background-size: 100% 100%;
   }
 
   .m-foot-statics {
     position: absolute;
-    width: 590px;
+    width: 465px;
     height: 175px;
     top: 30px;
   }
@@ -637,6 +466,10 @@
     font-size: 12px;
   }
 }
+.opt-select {
+  right: 0px;
+  top: 5px;
+}
 .m-foot-head::after,
 .c-case-all-title::after {
   content: "";
@@ -657,22 +490,24 @@
   .c-case-all-t-l,
   .c-case-all-t-c {
     position: relative;
-    width: 360px;
+    width: 275px;
     height: 337px;
     margin: auto;
     overflow: hidden;
     background: url(../assets/images/c_case_bg1.png) no-repeat center center;
+    background-size: 100% 100%;
   }
   .c-case-all-t-r {
     position: relative;
-    width: 220px;
+    width: 190px;
     height: 337px;
     margin: auto;
     overflow: hidden;
     background: url(../assets/images/c_case_bg2.png) no-repeat center center;
+    background-size: 100% 100%;
   }
   .c-case-all-ts {
-    width: 330px;
+    width: 230px;
     height: 290px;
     margin: 40px auto 0;
   }
@@ -689,7 +524,7 @@
     background: url(../assets/images/c_case_bg3.png) no-repeat center center;
   }
   .c-case-all-f-ts {
-    width: 985px;
+    width: 760px;
     height: 180px;
     margin: 10px auto 0;
   }
@@ -699,16 +534,16 @@
 }
 .m-foot-case {
   position: relative;
-  width: 1225px;
+  width: 910px;
   height: 240px;
-  margin: auto;
+  margin: 20px auto 0;
   overflow: hidden;
   background: url(../assets/images/c_case_bg5.png) no-repeat center center;
-
+  background-size: 100% 100%;
   .m-foot-case-table {
     position: absolute;
     height: 200px;
-    width: 1225px;
+    width: 910px;
     margin: 33px auto 0;
     font-size: 14px;
   }
@@ -748,7 +583,7 @@
 #cMain .ivu-input {
   background-color: #14375f;
   height: 40px;
-  width: 150px;
+  width: 110px;
   border: none;
   border-radius: 0px;
   color: #92a1b4;
@@ -789,6 +624,10 @@ span.ivu-date-picker-cells-cell-disabled:hover {
 }
 #cMain .ivu-icon-android-arrow-dropdown:hover {
   color: #1c9795;
+}
+#cMain .th .ivu-col,
+#cMain .tb .ivu-col {
+  line-height: 42px;
 }
 </style>
 
@@ -1678,7 +1517,9 @@ export default {
     close() {
       this.isDetailShow = false;
     },
-    popClose() {},
+    popClose() {
+      this.$emit("on-close");
+    },
     cvsCaseInfoChange() {
       // 根据接口获取新的数据
     },
@@ -2013,7 +1854,7 @@ export default {
       myChart.setOption(option);
     },
     caseArea(datas) {
-      let myChart = echarts.init(document.getElementById("mentalPatientsArea"));
+      let myChart = echarts.init(document.getElementById("caseManageArea"));
       let option = {
         series: [
           {
@@ -2286,7 +2127,7 @@ export default {
     },
     caseOftenArea(data) {},
     caseTs(datas) {
-      let myChart = echarts.init(document.getElementById("mentalPatientsTs"));
+      let myChart = echarts.init(document.getElementById("caseManageTs"));
       let option = {
         color: datas.color,
         tooltip: {
